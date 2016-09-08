@@ -1,0 +1,6 @@
+# BLASTP 2.2.26 [Sep-21-2011]
+# Query: sp|A0A8M2|L14AA_XENLA
+# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Archaea/259564.faa
+# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
+sp|A0A8M2|L14AA_XENLA	gi|91773962|ref|YP_566654.1|	37.84	37	22	1	113	149	39	74	1.4	27.3
+sp|A0A8M2|L14AA_XENLA	gi|91773629|ref|YP_566321.1|	42.86	21	12	0	365	385	714	734	8.6	24.6

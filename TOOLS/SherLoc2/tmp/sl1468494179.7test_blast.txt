@@ -1,0 +1,5 @@
+# BLASTP 2.2.26 [Sep-21-2011]
+# Query: sp|A0AEI5|BR2GB_RANGU
+# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/tmp//sl1468494179.7test.seq
+# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
+sp|A0AEI5|BR2GB_RANGU	sp|A0AEI5|BR2GB_RANGU	100.00	72	0	0	1	72	1	72	4e-38	 110

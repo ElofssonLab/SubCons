@@ -1,0 +1,6 @@
+# BLASTP 2.2.26 [Sep-21-2011]
+# Query: sp|A0A4Z3|A3LT2_RAT
+# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Archaea/187420.faa
+# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
+sp|A0A4Z3|A3LT2_RAT	gi|15679078|ref|NP_276195.1|	32.73	55	32	1	47	96	221	275	1.4	26.2
+sp|A0A4Z3|A3LT2_RAT	gi|15678478|ref|NP_275593.1|	23.23	155	87	6	16	157	101	236	3.0	25.4

@@ -1,0 +1,67 @@
+## Import required modules
+import sys,re
+import glob
+import subprocess, multiprocessing
+import os
+import commands
+import itertools
+import collections
+import numpy as np
+import pandas as pd
+import time
+'''
+print 'Importing Sequences...'
+
+# Import the FASTA file containing all the sequences
+from Bio import SeqIO
+f = open('P04439.fasta')
+seq_d=SeqIO.to_dict(SeqIO.parse(f,"fasta"))
+seq_d_keys=seq_d.keys()#[0].split('|')[1]
+
+################################################################
+########## Run psi-BLAST against each of the sequences #########
+################################################################
+
+print 'Running BLAST...'
+from Bio.Blast.Applications import NcbipsiblastCommandline
+for seq in seq_d_keys:
+    seq = seq.split('|')[1]
+    fasta_fname = seq+'.fasta'
+    pssm_output = seq+'.pssm'
+    profile_output = seq+'.profile'
+
+    if os.path.isfile(pssm_output) != True:
+        blast_psi_cline = NcbipsiblastCommandline(query=fasta_fname, db="database/formatdb/Uniref90.fasta", evalue=0.01,outfmt=8,out=profile_output, num_iterations=3, out_ascii_pssm=pssm_output)
+        print blast_psi_cline
+        stdout, stderr = blast_psi_cline()
+
+'''
+print 'Running Loctree2 and SherLoc2...'
+
+cmd_loctree2 = "loctree2 --fasta P04439.fasta --blastmat P04439.pssm --resfile euk_output.lc2 --domain euka"
+os.system(cmd_loctree2)
+'''
+def running_loctree2_sherloc2():
+	cmd_loctree2 = "loctree2 --fasta prova.fasta --blastmat prova.pssm --resfile euk_output.lc2 --domain euka"
+	os.system(cmd_loctree2)
+
+if __name__ == "__main__":
+	running_loctree2_sherloc2()
+output = commands.getoutput('ps -A')
+
+if 'blastpgp' not in output:
+	cmd_loctree2 = "loctree2 --fasta prova.fasta --blastmat prova.profile --resfile euk_output.lc2 --domain euka"
+	os.system(cmd_loctree2)
+
+
+list_psiblast_files = ["blastPsiOutTmp","chk","profile"] 
+files=glob.glob(paths)
+for line in files:
+	
+	if '.' in line:
+		file_name= line.split('/')[-1].split('/')[0].split('.')[1]
+		if file_name in list_psiblast_files:
+						
+			print file_name
+		#a=file_name.split('.')
+'''

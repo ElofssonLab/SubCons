@@ -1,0 +1,7 @@
+forests/*dat filter=lfs diff=lfs merge=lfs -text
+*.faa filter=lfs diff=lfs merge=lfs -text
+*.psq filter=lfs diff=lfs merge=lfs -text
+*.model filter=lfs diff=lfs merge=lfs -text
+*.phr filter=lfs diff=lfs merge=lfs -text
+seq/uniprot-all.fasta filter=lfs diff=lfs merge=lfs -text
+train_dataset_subcons.fasta filter=lfs diff=lfs merge=lfs -text

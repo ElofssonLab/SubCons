@@ -1,0 +1,8 @@
+# BLASTP 2.2.26 [Sep-21-2011]
+# Query: sp|P04899|GNAI2_HUMAN
+# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Archaea/323259.faa
+# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
+sp|P04899|GNAI2_HUMAN	gi|88602346|ref|YP_502524.1|	29.27	41	29	0	25	65	29	69	2.2	25.4
+sp|P04899|GNAI2_HUMAN	gi|88603219|ref|YP_503397.1|	23.26	86	66	0	118	203	331	416	2.4	26.6
+sp|P04899|GNAI2_HUMAN	gi|88603665|ref|YP_503843.1|	64.29	14	5	0	55	68	11	24	5.1	24.6
+sp|P04899|GNAI2_HUMAN	gi|88604250|ref|YP_504428.1|	37.50	32	19	1	32	62	155	186	5.4	25.4

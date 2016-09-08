@@ -1,0 +1,52 @@
+"""
+Parse HMMER3 hmmscan domtblout file and order it by domain name.
+
+!Note that this script does not remove overlapping domains.
+Alternative approach:
+1. Run impact on splicing to generate a domain list with protein keys.
+2. Run reorder_domain_list.py to get a list with domain keys.
+"""
+
+import sys
+from collections import OrderedDict
+import json
+
+def parse_domtblout(fn_domtblout):
+    """
+    Parse hmmscan domtblout file and return smaller list, ordered by
+    domain.
+    """
+    with open(fn_domtblout, 'r') as fh_domtblout:
+        lines = fh_domtblout.readlines()
+    
+    ## Add data to dict
+    d = {}
+    for line in lines[3:]:
+        l = line.split()
+        if not l[0] == '#':
+            domain_name = l[1]
+            protein_name = l[3]
+            c_evalue = float(l[11])
+            pos = (int(l[15]),int(l[16]))        
+            try:
+                d[domain_name].append([protein_name, pos, c_evalue])
+            except KeyError:
+                d[domain_name] = [[protein_name, pos, c_evalue]]
+    
+    ## List sorted by 1) key (domain name), 2) protein name, 3) start position, 4) end position
+
+    domain_list = sorted(d.items(), key=lambda x: (x[0],x[1][0]), reverse=False)
+    
+    return domain_list    
+
+if __name__ == '__main__':
+    """Main."""
+    
+    ## FASTA: reviewed human proteome from Uniprot (n = 20,187) (?)
+    fn_domtblout = '.prova.domtblout'
+    domain_list = parse_domtblout(fn_domtblout)
+    
+    ## Dump list to JSON file
+    fn_json_output = 'prova.domain_list.json'
+    with open(fn_json_output, 'w') as fh_json_output:
+        json.dump(domain_list, fh_json_output)

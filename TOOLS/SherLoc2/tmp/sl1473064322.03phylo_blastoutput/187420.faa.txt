@@ -1,0 +1,6 @@
+# BLASTP 2.2.26 [Sep-21-2011]
+# Query: sp|P04439|1A03_HUMAN
+# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Archaea/187420.faa
+# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
+sp|P04439|1A03_HUMAN	gi|15679014|ref|NP_276131.1|	35.14	37	24	0	184	220	331	367	2.6	25.8
+sp|P04439|1A03_HUMAN	gi|15679059|ref|NP_276176.1|	29.27	41	27	1	97	135	59	99	2.9	25.0
