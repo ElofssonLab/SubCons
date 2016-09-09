@@ -1,17 +1,19 @@
 import sys,os
 import pandas as pd
 
+if not len(sys.argv) == 2:
+  print "Usage:",sys.argv[0],"results_folder"
+  sys.exit(-1)
 
-
-loctree2 = pd.read_csv("../results/for-dat/loctree2.csv", sep='\t', encoding='utf-8')
-multiloc2 = pd.read_csv("../results/for-dat/multiloc2.csv", sep='\t', encoding='utf-8')
-sherloc2 = pd.read_csv("../results/for-dat/sherloc2.csv", sep='\t', encoding='utf-8')
+loctree2 = pd.read_csv(sys.argv[1]+"/for-dat/loctree2.csv", sep='\t', encoding='utf-8')
+multiloc2 = pd.read_csv(sys.argv[1]+"/for-dat/multiloc2.csv", sep='\t', encoding='utf-8')
+sherloc2 = pd.read_csv(sys.argv[1]+"/for-dat/sherloc2.csv", sep='\t', encoding='utf-8')
 
 
 list_available_pred = ["sherloc2","loctree2","multiloc2"]
 
 try:
-	cello = pd.read_csv("../results/for-dat/cello.csv", sep='\t', encoding='utf-8')
+	cello = pd.read_csv(sys.argv[1]+"/for-dat/cello.csv", sep='\t', encoding='utf-8')
 	list_available_pred.append('cello')
 	
 except:
@@ -19,7 +21,7 @@ except:
 	pass
 
 try:
-	yloc = pd.read_csv("../results/for-dat/yloc.csv", sep='\t', encoding='utf-8')
+	yloc = pd.read_csv(sys.argv[1]+"/for-dat/yloc.csv", sep='\t', encoding='utf-8')
 	list_available_pred.append('yloc')
 	
 except:
@@ -28,7 +30,7 @@ except:
 
 
 list_result = []
-for files in os.listdir("../results/for-dat/"):
+for files in os.listdir(sys.argv[1]+"/for-dat/"):
 	files = files.split('.')[0]
 	list_result.append(files)
 
@@ -69,7 +71,7 @@ create_merged_dataframe(list_result)
 
 
 saveout = sys.stdout
-ff1 = open('../results/dat-files/prediction.dat','w+')
+ff1 = open(sys.argv[1]+'/dat-files/prediction.dat','w+')
 sys.stdout=ff1
 for row in create_merged_dataframe(list_result).iterrows():
 	data = row[1][1:]

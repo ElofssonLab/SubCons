@@ -4,6 +4,10 @@ import pandas as pd
 import time
 from collections import Counter
 
+if not len(sys.argv) == 4:
+  print "Usage:",sys.argv[0],"fasta_folder results_folder tmp_folder"
+  sys.exit(-1)
+  
 dic_loc = {'nuclear':'NUC','plasma membrane':'MEM','extracellular':'EXE','cytoplasmic':'CYT','mitochondrial':'MIT','ER':'ERE','peroxisomal':'VES','lysosomal':'VES','Golgi apparatus':'GLG'}
 dic_sherloc2_loc = {'VES':'VES','cytoplasmic':'CYT','ER':'ERE','Golgi apparatus':'GLG','lysosomal':'VES','mitochondrial':'MIT','nuclear':'NUC','peroxisomal':'VES','plasma membrane':'MEM','extracellular':'EXC'}
 dic_loctree2_loc = {'chloroplast':'MIT','chloroplast membrane':'MIT','cytosol':'CYT','endoplasmic reticulum':'ERE','endoplasmic reticulum membrane':'ERE','golgi apparatus':'GLG','golgi apparatus membrane':'GLG','mitochondria':'MIT','mitochondria membrane':'MIT','nucleus':'NUC','nucleus membrane':'NUC','peroxisome':'VES','peroxisome membrane':'VES','plasma membrane':'MEM','plastid':'MIT','vacuole':'MIT','vacuole membrane':'MIT','secreted':'EXC'}
@@ -12,9 +16,9 @@ dic_yloc_loc = {'cytoplasm':'CYT','ER':'ERE','Golgi':'GLG','lysosome':'VES','mit
 dic_multiloc2_loc = {'VES':'VES','cytoplasmic':'CYT','ER':'ERE','Golgi apparatus':'GLG','lysosomal':'VES','mitochondrial':'MIT','nuclear':'NUC','peroxisomal':'VES','plasma membrane':'MEM','extracellular':'EXC'} 
 
 
-path_uncomplete = '../JUNK/'
+path_uncomplete = sys.argv[3]
 
-path_file = '../fasta/'
+path_file = sys.argv[1]
 paths_file = glob.glob(path_file+'*fasta')
 
 check_number_seq_submitted = []
@@ -23,15 +27,15 @@ for files in paths_file:
 	files = files.split('/')[2].split('.')[0]
 	check_number_seq_submitted.append(files)
 	
-path = '../results/prediction/'
-paths = glob.glob(path+'*.*.res')
+path_results = sys.argv[2]+'/prediction/'
+paths_results = glob.glob(path_results+'*.*.res')
 
 check_number_predictor_used = []
 check_id = []
 
-for el in paths:
-	name_file = el.split('/')[3].split('.')[0]
-	predictor_used = el.split('/')[3].split('.')[1]
+for el in paths_results:
+	name_file = el.split('/')[2].split('.')[0]
+	predictor_used = el.split('/')[2].split('.')[1]
 	check_id.append(name_file)
 	check_number_predictor_used.append(predictor_used)
 
@@ -63,38 +67,38 @@ def read_multiple_files(extension,output):
 						for line in infile:
 							outfile.write(line)
 	
-read_multiple_files('../results/prediction/*.lc2.res','../results/prediction/loctree2.res')
-read_multiple_files('../results/prediction/*.s2.res','../results/prediction/sherloc2.res')
-read_multiple_files('../results/prediction/*.m2.res','../results/prediction/multiloc2.res')
+read_multiple_files(sys.argv[2]+'/prediction/*.lc2.res',sys.argv[2]+'/prediction/loctree2.res')
+read_multiple_files(sys.argv[2]+'/prediction/*.s2.res',sys.argv[2]+'/prediction/sherloc2.res')
+read_multiple_files(sys.argv[2]+'/prediction/*.m2.res',sys.argv[2]+'/prediction/multiloc2.res')
 
 try:
-	read_multiple_files('../results/prediction/*.c.res','../results/prediction/cello.res')
+	read_multiple_files(sys.argv[2]+'/prediction/*.c.res',sys.argv[2]+'/prediction/cello.res')
 except:
 	pass
 try:
-	read_multiple_files('../results/prediction/*.y.res','../results/prediction/yloc.res')
+	read_multiple_files(sys.argv[2]+'/prediction/*.y.res',sys.argv[2]+'/prediction/yloc.res')
 except:
 	pass	
 
 
 time.sleep(5)
 
-loctree2 = open('../results/prediction/loctree2.res')
+loctree2 = open(sys.argv[2]+'/prediction/loctree2.res')
 loctree2 = loctree2.read().splitlines()
-sherloc2 = open('../results/prediction/sherloc2.res')
+sherloc2 = open(sys.argv[2]+'/prediction/sherloc2.res')
 sherloc2 = sherloc2.read().splitlines()
-multiloc2 = open('../results/prediction/multiloc2.res')
+multiloc2 = open(sys.argv[2]+'/prediction/multiloc2.res')
 multiloc2 = multiloc2.read().splitlines()
 
 try:
-	yloc = open('../results/prediction/yloc.res')
+	yloc = open(sys.argv[2]+'/prediction/yloc.res')
 	yloc = sherloc2.read().splitlines()
 
 except:
 	pass
 
 try:
-	cello = open('../results/prediction/cello.res')
+	cello = open(sys.argv[2]+'/prediction/cello.res')
 	cello = cello.read().splitlines()
 except:
 	pass
@@ -208,7 +212,7 @@ try:
 			if k in dic_cello:
 				dic_cello[k][loc1]=score
 	cello_df = pd.DataFrame(dic_cello).T
-	cello_df.to_csv("../results/for-dat/cello.csv", sep='\t', encoding='utf-8')
+	cello_df.to_csv(sys.argv[2]+'/for-dat/cello.csv', sep='\t', encoding='utf-8')
 except:
 	pass
 
@@ -229,7 +233,7 @@ for line in multiloc2:
 		dic_multiloc2[ids]=d3
 
 multiloc2_df = pd.DataFrame(dic_multiloc2).T
-multiloc2_df.to_csv("../results/for-dat/multiloc2.csv", sep='\t', encoding='utf-8')
+multiloc2_df.to_csv(sys.argv[2]+'/for-dat/multiloc2.csv', sep='\t', encoding='utf-8')
 		
 for line in sherloc2:
 	if line.startswith('sp'):
@@ -248,7 +252,7 @@ for line in sherloc2:
 		dic_sherloc2[ids]=d5
 
 sherloc2_df = pd.DataFrame(dic_sherloc2).T
-sherloc2_df.to_csv("../results/for-dat/sherloc2.csv", sep='\t', encoding='utf-8')
+sherloc2_df.to_csv(sys.argv[2]+'/for-dat/sherloc2.csv', sep='\t', encoding='utf-8')
 
 
 for line in loctree2:
@@ -288,7 +292,7 @@ for col_in_loctree2 in lack_loc_in_loctree2:
 
 loctree2_df = loctree2_df.fillna(0.0)
 loctree2_df = loctree2_df.sort_index(axis=1)
-loctree2_df.to_csv("../results/for-dat/loctree2.csv", sep='\t', encoding='utf-8')
+loctree2_df.to_csv(sys.argv[2]+'/for-dat/loctree2.csv', sep='\t', encoding='utf-8')
 
 try:
 	for line in yloc:
@@ -325,7 +329,7 @@ try:
     		yloc_df[col_in_yloc] = 0.0
 	yloc_df = yloc_df.fillna(0.0)
 	yloc_df = yloc_df.sort_index(axis=1)
-	yloc_df.to_csv("../results/for-dat/yloc.csv", sep='\t', encoding='utf-8')
+	yloc_df.to_csv(sys.argv[2]+'/for-dat/yloc.csv', sep='\t', encoding='utf-8')
 
 except:
 	pass

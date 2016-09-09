@@ -1,11 +1,12 @@
 import glob,os,sys
-import webbrowser
 import mechanize
 import time
-from bs4 import BeautifulSoup
 import re
 from mechanize import Browser
 
+if not len(sys.argv) == 2:
+  print "Usage:",sys.argv[0],"fasta file"
+  sys.exit(-1)
 
 def cello():
 	url = "http://cello.life.nctu.edu.tw/" #for Cello
@@ -23,16 +24,11 @@ def cello():
 
 
 
-path = '../fasta/'
+path = sys.argv[1]
 paths = glob.glob(path+'*.fasta')
 
    
 for line in paths:
 	identification = line.split('/')[2].split('.')[0]
-	with open(os.path.join('../results/prediction/'+ identification + '.c.res'),'w') as files:
-		saveout=sys.stdout
-		sys.stdout=files
-		cello()
-		files.close()
-		sys.stdout=saveout
+	cello()
 

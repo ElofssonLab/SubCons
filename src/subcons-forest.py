@@ -52,13 +52,13 @@ def take_ids(handle):
 
 
 # test data provided as argument to the script
-Xt, Yt = readXY(open(sys.argv[1]))
+Xt, Yt = readXY(open(sys.argv[1]+"/dat-files/prediction.dat"))
 
 # test data provided as argument to the script to extract the protein id
-id_protein = take_ids(open(sys.argv[1]))
+id_protein = take_ids(open(sys.argv[1]+"/dat-files/prediction.dat"))
 
 list_result = []
-for files in os.listdir("../results/for-dat/"):
+for files in os.listdir(sys.argv[1]+"/for-dat/"):
 	list_result.append(files)
 
 
@@ -66,15 +66,15 @@ def peak_correct_forest(list_pred):
 	global f
 	
 	if len(list_pred)==5:
-		f = pickle.load(open('../forests/forest-slycm.dat',"rb"))
+		f = pickle.load(open('forests/forest-slycm.dat',"rb"))
 		return f
 		
 	elif len(list_pred)==4:					
-		f = pickle.load(open('../forests/forest-slm'+str(list_pred[3][0])+'.dat',"rb"))	
+		f = pickle.load(open('forests/forest-slm'+str(list_pred[3][0])+'.dat',"rb"))	
 		return f
 	
 	elif len(list_pred) == 3:
-		f = pickle.load(open('../forests/forest-slm.dat',"rb"))
+		f = pickle.load(open('forests/forest-slm.dat',"rb"))
 		return f
 
 
@@ -87,7 +87,7 @@ probs = f.predict_proba(Xt)
 # YOU NEED TO CHANGE THE PATH TO PRINT THE FILE
 
 saveout = sys.stdout
-ff1 = open('../results/final-prediction/name.subcons.pred','w+')
+ff1 = open(sys.argv[1]+'/final-prediction/subcons-final.pred','w+')
 sys.stdout=ff1
 for i in range(len(Xt)):
 	if predictions[i] in loc_types_1.keys():
