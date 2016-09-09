@@ -1,9 +1,0 @@
-# BLASTP 2.2.26 [Sep-21-2011]
-# Query: sp|A0AV96|RBM47_HUMAN
-# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Bacteria/all/251221.faa
-# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
-sp|A0AV96|RBM47_HUMAN	gi|37520960|ref|NP_924337.1|	33.80	71	41	2	73	137	3	73	8e-05	39.7
-sp|A0AV96|RBM47_HUMAN	gi|37520960|ref|NP_924337.1|	29.11	79	46	2	248	318	3	79	0.18	30.0
-sp|A0AV96|RBM47_HUMAN	gi|37520960|ref|NP_924337.1|	30.49	82	51	3	153	233	3	79	0.21	30.0
-sp|A0AV96|RBM47_HUMAN	gi|37522099|ref|NP_925476.1|	35.19	54	34	1	73	125	3	56	4e-04	37.7
-sp|A0AV96|RBM47_HUMAN	gi|37521070|ref|NP_924447.1|	35.48	31	20	0	201	231	663	693	4.3	26.9

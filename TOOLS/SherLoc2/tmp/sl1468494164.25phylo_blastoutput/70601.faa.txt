@@ -1,6 +1,0 @@
-# BLASTP 2.2.26 [Sep-21-2011]
-# Query: sp|A0A5B9|TRBC2_HUMAN
-# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Archaea/70601.faa
-# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
-sp|A0A5B9|TRBC2_HUMAN	gi|14590067|ref|NP_142131.1|	42.86	35	18	1	37	69	86	120	0.30	27.3
-sp|A0A5B9|TRBC2_HUMAN	gi|14589989|ref|NP_142052.1|	33.33	27	18	0	98	124	503	529	6.5	23.1

@@ -1,6 +1,0 @@
-# BLASTP 2.2.26 [Sep-21-2011]
-# Query: sp|A0A0C5B5G6|MOTSC_HUMAN
-# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Bacteria/all/156889.faa
-# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
-sp|A0A0C5B5G6|MOTSC_HUMAN	gi|117925118|ref|YP_865735.1|	54.55	11	5	0	1	11	178	188	4.1	20.4
-sp|A0A0C5B5G6|MOTSC_HUMAN	gi|117926369|ref|YP_866986.1|	42.86	14	8	0	3	16	63	76	8.4	19.2

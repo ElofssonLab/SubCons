@@ -1,4 +1,0 @@
-# BLASTP 2.2.26 [Sep-21-2011]
-# Query: sp|P84465|TPAN1_PANIM
-# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/tmp//sl1468934167.77test.seq
-# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
