@@ -1,0 +1,9 @@
+# BLASTP 2.2.26 [Sep-21-2011]
+# Query: sp|P04439|1A03_HUMAN
+# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Bacteria/all/203124.faa
+# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
+sp|P04439|1A03_HUMAN	gi|113476766|ref|YP_722827.1|	26.79	112	59	7	195	304	485	575	0.78	28.9
+sp|P04439|1A03_HUMAN	gi|113477401|ref|YP_723462.1|	24.14	87	56	3	32	116	265	343	2.0	27.7
+sp|P04439|1A03_HUMAN	gi|113476055|ref|YP_722116.1|	41.18	34	19	1	212	244	33	66	3.5	25.0
+sp|P04439|1A03_HUMAN	gi|113477016|ref|YP_723077.1|	27.91	86	59	1	182	264	85	170	6.9	25.4
+sp|P04439|1A03_HUMAN	gi|113476194|ref|YP_722255.1|	37.04	27	17	0	165	191	506	532	9.2	25.4

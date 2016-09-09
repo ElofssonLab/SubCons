@@ -1,0 +1,9 @@
+# BLASTP 2.2.26 [Sep-21-2011]
+# Query: sp|A0A4Z3|A3LT2_RAT
+# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Bacteria/all/64471.faa
+# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
+sp|A0A4Z3|A3LT2_RAT	gi|113954598|ref|YP_731400.1|	42.86	35	18	1	229	261	59	93	0.15	28.5
+sp|A0A4Z3|A3LT2_RAT	gi|113954455|ref|YP_729289.1|	37.04	54	29	2	240	293	377	425	1.7	26.6
+sp|A0A4Z3|A3LT2_RAT	gi|113953431|ref|YP_730828.1|	41.67	24	12	1	299	322	48	69	1.8	24.6
+sp|A0A4Z3|A3LT2_RAT	gi|113952733|ref|YP_730235.1|	51.85	27	11	1	9	33	19	45	5.4	24.6
+sp|A0A4Z3|A3LT2_RAT	gi|113955332|ref|YP_730509.1|	39.53	43	21	2	144	181	179	221	6.2	24.6

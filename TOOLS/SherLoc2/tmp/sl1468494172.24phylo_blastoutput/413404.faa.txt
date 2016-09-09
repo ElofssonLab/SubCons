@@ -1,0 +1,10 @@
+# BLASTP 2.2.26 [Sep-21-2011]
+# Query: sp|A0FLQ6|DPOLQ_CAEEL
+# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Bacteria/all/413404.faa
+# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
+sp|A0FLQ6|DPOLQ_CAEEL	gi|118602134|ref|YP_903349.1|	31.46	410	242	13	1273	1657	510	905	1e-48	 183
+sp|A0FLQ6|DPOLQ_CAEEL	gi|118602442|ref|YP_903657.1|	23.40	94	51	2	1435	1508	167	259	1.6	27.7
+sp|A0FLQ6|DPOLQ_CAEEL	gi|118602897|ref|YP_904112.1|	20.37	108	83	2	48	152	289	396	1.9	27.7
+sp|A0FLQ6|DPOLQ_CAEEL	gi|118602897|ref|YP_904112.1|	27.87	61	42	1	327	385	516	576	9.3	25.4
+sp|A0FLQ6|DPOLQ_CAEEL	gi|118602472|ref|YP_903687.1|	30.23	43	30	0	967	1009	421	463	3.0	26.9
+sp|A0FLQ6|DPOLQ_CAEEL	gi|118602937|ref|YP_904152.1|	38.71	31	19	0	1169	1199	89	119	5.4	25.8

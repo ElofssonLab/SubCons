@@ -1,0 +1,22 @@
+_________________________________ Wed Sep  7 13:14:23 2016 REQUEST:
+<SOAP-ENV:Envelope xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ZSI="http://www.zolera.com/schemas/ZSI/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><SOAP-ENV:Header></SOAP-ENV:Header><SOAP-ENV:Body xmlns:ns1="urn:YLocSOAP.wsdl"><ns1:predict><input><proteins><sequence>MDGSNVTSFVVEEPTNISTGRNASVGNAHRQIPIVHWVIMSISPVGFVENGILLWFLCFRMRRNPFTVYITHLSIADISLLFCIFILSIDYALDYELSSGHYYTIVTLSVTFLFGYNTGLYLLTAISVERCLSVLYPIWYRCHRPKYQSALVCALLWALSCLVTTMEYVMCIDREEESHSRNDCRAVIIFIAILSFLVFTPLMLVSSTILVVKIRKNTWASHSSKLYIVIMVTIIIFLIFAMPMRLLYLLYYEYWSTFGNLHHISLLFSTINSSANPFIYFFVGSSKKKRFKESLKVVLTRAFKDEMQPRRQKDNCNTVTVETVV</sequence><name>sp|P04201|MAS_HUMAN</name></proteins><model>YLoc-LowRes</model><origin>Animals</origin><homology>No</homology></input></ns1:predict></SOAP-ENV:Body></SOAP-ENV:Envelope>
+_________________________________ Wed Sep  7 13:14:23 2016 RESPONSE:
+503
+Service Temporarily Unavailable
+-------
+Date: Wed, 07 Sep 2016 11:14:23 GMT
+Vary: Accept-Encoding
+Content-Length: 323
+Connection: close
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+</body></html>
+

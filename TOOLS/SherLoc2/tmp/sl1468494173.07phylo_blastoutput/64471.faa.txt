@@ -1,0 +1,6 @@
+# BLASTP 2.2.26 [Sep-21-2011]
+# Query: sp|A0JME2|MCAF1_DANRE
+# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Bacteria/all/64471.faa
+# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
+sp|A0JME2|MCAF1_DANRE	gi|113955309|ref|YP_731435.1|	40.91	22	13	0	698	719	74	95	4.2	26.2
+sp|A0JME2|MCAF1_DANRE	gi|113953483|ref|YP_730032.1|	38.24	34	18	1	773	806	423	453	5.6	26.6
