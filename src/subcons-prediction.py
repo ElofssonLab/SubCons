@@ -11,6 +11,10 @@
 import sys,os
 import pickle
 
+# in case the pickle library does not work use:
+#from sklearn.externals import joblib
+#EXAMPLE : f = joblib.load(open('forests/forest-slycm.dat',"rb")
+
 if not len(sys.argv) == 2:
   print "Usage:",sys.argv[0],"test_file"
   sys.exit(-1)
@@ -64,17 +68,27 @@ for files in os.listdir(sys.argv[1]+"/for-dat/"):
 
 def peak_correct_forest(list_pred):
 	global f
-	
 	if len(list_pred)==5:
 		f = pickle.load(open('forests/forest-slycm.dat',"rb"))
+		#f = joblib.load(open('forests/forest-slycm.dat',"rb") 
 		return f
 		
-	elif len(list_pred)==4:					
-		f = pickle.load(open('forests/forest-slm'+str(list_pred[3][0])+'.dat',"rb"))	
-		return f
-	
+	elif len(list_pred)== 4 :
+		try :
+			if str("cello") in list_pred:					
+				f = pickle.load(open('forests/forest-slmc.dat',"rb"))
+				#f = joblib.load(open('forests/forest-slycm.dat',"rb") 
+				return f
+			else:
+				f = pickle.load(open('forests/forest-slmy.dat',"rb"))
+				#f = joblib.load(open('forests/forest-slycm.dat',"rb") 
+				return f				
+		except:
+			pass
+			
 	elif len(list_pred) == 3:
 		f = pickle.load(open('forests/forest-slm.dat',"rb"))
+		#f = joblib.load(open('forests/forest-slycm.dat',"rb") 
 		return f
 
 

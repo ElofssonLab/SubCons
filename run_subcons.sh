@@ -165,7 +165,7 @@ python src/subcons-file-dat.py $OUTDIR
 
 echo "Obtain final prediction with SubCons"
 
-python src/subcons-forest.py $OUTDIR
+python src/subcons-prediction.py $OUTDIR
 
 #REMOVE UNNECESSARY INTERMEDIATE FILES
 #rm ../results/prediction/*.res 
