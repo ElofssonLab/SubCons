@@ -1,0 +1,48 @@
+#!/bin/bash
+
+#install programs in the virtual environment
+
+sudo apt-get python-pip
+
+sudo pip install numpy
+sudo pip install scipy
+sudo pip install sklearn
+sudo pip install ZSI
+sudo pip install mechanize
+sudo pip install pandas
+sudo pip install matplotlib
+
+#INSTALL LIBSVM FOR SHERLOC2 & MULTILOC2
+git clone https://github.com/cjlin1/libsvm.git # then open cd libsvm/ and type : make all
+
+#INSTALL BLAST PACKAGE 
+sudo apt-get install ncbi-blast+ 
+sudo apt-get install blast2
+
+#INSTALL LOCTREE2 TYPE FROM THE COMMAND LINE THE FOLLOWING:
+
+sudo apt-get install python-software-properties
+sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
+sudo apt-get update (ignore GPG error)
+sudo apt-get install rostlab-debian-keyring (without verification)
+sudo apt-get update
+sudo apt-get install loctree2
+
+
+#YOU ALSO NEED loctree2-data so download using:
+
+#	1-) wget ftp://rostlab.org/free/loctree2-data-1.0.2.tar.gz
+
+#	2-) untar this file in /usr/share 
+
+
+#IF YOU GOT AN ERROR LIKE THIS : Cannot set LC_CTYPE to default locale: No such file or directory
+#Maybe you also need to type in the terminal this command:
+
+#	A-) export LC_ALL="en_US.UTF-8"
+
+
+
+
+
+
