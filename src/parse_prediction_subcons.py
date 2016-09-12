@@ -11,7 +11,7 @@ if not len(sys.argv) == 4:
 dic_loc = {'nuclear':'NUC','plasma membrane':'MEM','extracellular':'EXE','cytoplasmic':'CYT','mitochondrial':'MIT','ER':'ERE','peroxisomal':'VES','lysosomal':'VES','Golgi apparatus':'GLG'}
 dic_sherloc2_loc = {'VES':'VES','cytoplasmic':'CYT','ER':'ERE','Golgi apparatus':'GLG','lysosomal':'VES','mitochondrial':'MIT','nuclear':'NUC','peroxisomal':'VES','plasma membrane':'MEM','extracellular':'EXC'}
 dic_loctree2_loc = {'chloroplast':'MIT','chloroplast membrane':'MIT','cytosol':'CYT','endoplasmic reticulum':'ERE','endoplasmic reticulum membrane':'ERE','golgi apparatus':'GLG','golgi apparatus membrane':'GLG','mitochondria':'MIT','mitochondria membrane':'MIT','nucleus':'NUC','nucleus membrane':'NUC','peroxisome':'VES','peroxisome membrane':'VES','plasma membrane':'MEM','plastid':'MIT','vacuole':'MIT','vacuole membrane':'MIT','secreted':'EXC'}
-dic_cello_loc ={'Chloroplast':'MIT','Cytoplasmic':'CYT','Cytoskeletal':'CYT','ER':'ERE','Golgi':'GLG','Lysosomal':'VES','Mitochondrial':'MIT','Nuclear':'NUC','Peroxisomal':'VES','PlasmaMembrane':'MEM',"Vacuole":"MIT",'Extracellular':'EXC'}
+dic_cello_loc ={'Cytoplasmic':'CYT','Cytoskeletal':'CYT','ER':'ERE','Golgi':'GLG','Lysosomal':'VES','Mitochondrial':'MIT','Nuclear':'NUC','Peroxisomal':'VES','PlasmaMembrane':'MEM','Extracellular':'EXC'}
 dic_yloc_loc = {'cytoplasm':'CYT','ER':'ERE','Golgi':'GLG','lysosome':'VES','mitochondrion':'MIT','nucleus':'NUC','peroxisome':'VES','plasma':'MEM','extracellular':'EXC'}
 dic_multiloc2_loc = {'VES':'VES','cytoplasmic':'CYT','ER':'ERE','Golgi apparatus':'GLG','lysosomal':'VES','mitochondrial':'MIT','nuclear':'NUC','peroxisomal':'VES','plasma membrane':'MEM','extracellular':'EXC'} 
 

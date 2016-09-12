@@ -19,16 +19,15 @@ def cello():
 	br.form.set_all_readonly(False)
 	res = br.submit()
 	content = res.read()
-	print content
+	return content
 
 
 
 
-path = sys.argv[1]
-paths = glob.glob(path+'*.fasta')
+#path = sys.argv[1]
+paths = glob.glob(sys.argv[1])
 
    
 for line in paths:
-	identification = line.split('/')[2].split('.')[0]
-	cello()
-
+	file_prediction = cello()
+	print file_prediction
