@@ -54,18 +54,6 @@ def take_ids(handle):
   return Z
   
 
-
-# test data provided as argument to the script
-Xt, Yt = readXY(open(sys.argv[1]+"/dat-files/prediction.dat"))
-
-# test data provided as argument to the script to extract the protein id
-id_protein = take_ids(open(sys.argv[1]+"/dat-files/prediction.dat"))
-
-list_result = []
-for files in os.listdir(sys.argv[1]+"/for-dat/"):
-	list_result.append(files)
-
-
 def peak_correct_forest(list_pred):
 	global f
 	if len(list_pred)==5:
@@ -92,28 +80,51 @@ def peak_correct_forest(list_pred):
 		return f
 
 
+predictor_list = []
 
-peak_correct_forest(list_result)
-predictions = f.predict(Xt)
-probs = f.predict_proba(Xt)
+for files in os.listdir(sys.argv[1]+"/for-dat/"):
+	predictor_used = files.split('.')[1]
+	predictor_list.append(predictor_used)
+	predictor_list= sorted(set(predictor_list))
 
-# SAVE THE FILE WITH THE RESULTS
-# YOU NEED TO CHANGE THE PATH TO PRINT THE FILE
-
-saveout = sys.stdout
-ff1 = open(sys.argv[1]+'/final-prediction/subcons-final.pred','w+')
-sys.stdout=ff1
-for i in range(len(Xt)):
-	if predictions[i] in loc_types_1.keys():
-		id_protein[i] = id_protein[i].split("#")[1]
-		subcons_prediction = str(predictions[i]).replace(str(predictions[i]),loc_types_2[str(predictions[i])])
-		#PRINT ALL THE PROBABILITIES FOR ALL THE LOCALIZATIONS
 		
-		print id_protein[i]+"\t"+"LOC_DEF:"+str(subcons_prediction)+"\t"+'CYT:'+str(probs[i][0])+"\t"+'ERE:'+str(probs[i][1])+"\t"+'EXC:'+str(probs[i][2])+"\t"+'GLG:'+str(probs[i][3])+"\t"+'MEM:'+str(probs[i][4])+"\t"+'MIT:'+str(probs[i][5])+"\t"+'NUC:'+str(probs[i][6])+"\t"+'VES:'+str(probs[i][7])
-		#PRINT ONLY THE FINAL LOCALIZATION DECIDED BY SUBCONS
-		#print id_protein[i],subcons_prediction
+for el in os.listdir(sys.argv[1]+"/dat-files/"):
+	name_file = el.split('.')[0]
+	# test data provided as argument to the script
+	Xt, Yt = readXY(open(sys.argv[1]+"/dat-files/"+str(name_file)+".dat"))
+
+	# test data provided as argument to the script to extract the protein id
+	id_protein = take_ids(open(sys.argv[1]+"/dat-files/"+str(name_file)+".dat"))
+	peak_correct_forest(predictor_list)
+	predictions = f.predict(Xt)
+	probs = f.predict_proba(Xt)
+
+	# SAVE THE FILE WITH THE RESULTS
+	# YOU NEED TO CHANGE THE PATH TO PRINT THE FILE
+
+	saveout = sys.stdout
+	ff1 = open(sys.argv[1]+'/final-prediction/'+str(name_file)+'.subcons-final-pred.csv','w+')
+	sys.stdout=ff1
+	for i in range(len(Xt)):
+		if predictions[i] in loc_types_1.keys():
+			id_protein[i] = id_protein[i].split("#")[1]
+			subcons_prediction = str(predictions[i]).replace(str(predictions[i]),loc_types_2[str(predictions[i])])
+			#PRINT ALL THE PROBABILITIES FOR ALL THE LOCALIZATIONS
+			print "id_protein"+"\t"+"LOC_DEF"+"\t"+"CYT"+"\t"+"ERE"+"\t"+"EXC"+"\t"+"GLG"+"\t"+"MEM"+"\t"+"MIT"+"\t"+"NUC"+"\t"+"VES"
+			print id_protein[i]+"\t"+str(subcons_prediction)+"\t"+str(round(float(probs[i][0]),2))+"\t"+str(round(float(probs[i][1]),2))+"\t"+str(round(float(probs[i][2]),2))+"\t"+str(round(float(probs[i][3]),2))+"\t"+str(round(float(probs[i][4]),2))+"\t"+str(round(float(probs[i][5]),2))+"\t"+str(round(float(probs[i][6]),2))+"\t"+str(round(float(probs[i][7]),2))
+			#PRINT ONLY THE FINAL LOCALIZATION DECIDED BY SUBCONS
+			#print id_protein[i],subcons_prediction
 		
-sys.stdout=saveout
-ff1.close()
+	sys.stdout=saveout
+	ff1.close()
+print predictor_list
+
+
+
+
+
+
+
+
 
 

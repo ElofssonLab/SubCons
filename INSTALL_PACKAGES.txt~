@@ -12,6 +12,7 @@ sudo pip install matplotlib
 
 #INSTALL LIBSVM FOR SHERLOC2 & MULTILOC2
 git clone https://github.com/cjlin1/libsvm.git # then open cd libsvm/ and type : make all
+# svm-predict & co must be move in /usr/bin
 
 #INSTALL BLAST PACKAGE 
 sudo apt-get install ncbi-blast+ 

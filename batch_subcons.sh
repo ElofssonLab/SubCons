@@ -24,7 +24,7 @@ do
 	filename=`basename "$mfile"`
 	fname=$(echo $filename | cut -d'.' -f 1)
 	echo "RUNNING run_subcons_sh"
-	echo "bash run_subcons.sh $SEQFILE/$fname.fasta $OUTDIR $TMPDIR/$fname"
+	echo "bash run_subcons.sh $SEQFILE/$fname.fasta $OUTDIR $TMPDIR"
 	bash run_subcons.sh $SEQFILE/$fname.fasta $OUTDIR $TMPDIR
 done
 
@@ -64,9 +64,9 @@ elif (("$count" > 1));then
 
 	if [[ -f "$resfile_loctree2" && "$resfile_sherloc2" && "$resfile_multiloc2" ]]
 	then
-		echo "For $fname the files of SherLoc2, LocTree2 and MultiLoc2 are here so continue"
+		echo "The files of SherLoc2, LocTree2 and MultiLoc2 are here so continue"
 	else
-		echo "For $fname the files of SherLoc2, LocTree2 and MultiLoc2 are not here, so I put the file in the folder ../JUNK/"
+		echo "The files of SherLoc2, LocTree2 and MultiLoc2 are not here, so I put the file in the folder ../JUNK"
 		mv $OUTDIR/prediction/$fname.* $TMPDIR
 	fi
 
@@ -76,7 +76,7 @@ sleep 1
 
 echo "Parse prediction and obtain test file"
 
-python src/parse_prediction_subcons.py $SEQFILE $OUTDIR $TMPDIR
+python src/parse_prediction_subcons.py $OUTDIR
 
 sleep 1
 
@@ -89,6 +89,12 @@ sleep 1
 echo "Obtain final prediction with SubCons"
 
 python src/subcons-prediction.py $OUTDIR
+
+sleep 1
+
+echo "Plot Results"
+
+python src/plot_results.py $OUTDIR
 
 echo "REMOVE UNNECESSARY INTERMEDIATE FILES"
 rm $OUTDIR/prediction/*.res 
