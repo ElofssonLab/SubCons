@@ -32,7 +32,7 @@ def predictors_merged_dataframe(list_pred,a):
 		new_columns = df_subcons_1.columns[df_subcons_1.ix[df_subcons_1.last_valid_index()].argsort()]
 		df_subcons_1 =  df_subcons_1[new_columns]
 		df_final1 = df_final1[new_columns]
-		df_all = df_final1.append(df_subcons_1,ignore_index=False)
+		df_all = df_final1.append(df_subcons_1,ignore_index=True)
 		list_pred.append("SubCons")
 		se = pd.Series(list_pred)
 		df_all['Tools'] = se.values
@@ -62,7 +62,7 @@ def predictors_merged_dataframe(list_pred,a):
 		new_columns = df_subcons_1.columns[df_subcons_1.ix[df_subcons_1.last_valid_index()].argsort()]
 		df_subcons_1 =  df_subcons_1[new_columns]
 		df_final1 = df_final1[new_columns]
-		df_all = df_final1.append(df_subcons_1,ignore_index=False)
+		df_all = df_final1.append(df_subcons_1,ignore_index=True)
 		list_pred.append("SubCons")
 		se = pd.Series(list_pred)
 		df_all['Tools'] = se.values
@@ -91,7 +91,7 @@ def predictors_merged_dataframe(list_pred,a):
 		new_columns = df_subcons_1.columns[df_subcons_1.ix[df_subcons_1.last_valid_index()].argsort()]
 		df_subcons_1 =  df_subcons_1[new_columns]
 		df_final1 = df_final1[new_columns]
-		df_all = df_final1.append(df_subcons_1,ignore_index=False)
+		df_all = df_final1.append(df_subcons_1,ignore_index=True)
 		list_pred.append("SubCons")
 		se = pd.Series(list_pred)
 		df_all['Tools'] = se.values
@@ -102,7 +102,9 @@ def predictors_merged_dataframe(list_pred,a):
 		df_all.Tools[df_all.Tools=='multiloc2']='MultiLoc2'
 		df_all.Tools[df_all.Tools=='loctree2']='LocTree2'
 		df_all.to_csv(sys.argv[1]+'/plot/'+str(predictor1["Unnamed: 0"][0])+'.csv', sep='\t', encoding='utf-8')
-		
+
+
+	
 predictor_list = []
 all_list = []
 dic_all = {}		
@@ -123,7 +125,9 @@ print predictor_list
 for k,v in dic_all.iteritems():
 	predictors_merged_dataframe(predictor_list,k)
 
-
+# I PLOT WITH GGPLOTW IN R BECAUSE 
+# IF YOU LIKE MORE THE MATPLOTLIB LIBRARY DECOMMET THIS
+'''	
 for files_csv in os.listdir(sys.argv[1]+"/plot/"):
 	print files_csv
 	name_plot = files_csv.split('.')[0]
@@ -196,3 +200,4 @@ for files_csv in os.listdir(sys.argv[1]+"/plot/"):
 		plt.grid(b=False,color='grey', linestyle='--')
 		plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".pdf",transparent=True,dpi = 300)
 
+'''

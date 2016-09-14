@@ -40,12 +40,26 @@ pssmfile=$OUTDIR/$rootname_seqfile.pssm
 
 #GetPSSMFile()
 
-resfile_loctree2=$OUTDIR/prediction/${rootname_seqfile}.lc2.res
-
+#CREATE FOLDER:
 if [ ! -d "$OUTDIR/prediction" ]; then
 	mkdir -p $OUTDIR/prediction
 fi
 
+if [ ! -d "$OUTDIR/for-dat" ]; then
+	mkdir -p $OUTDIR/for-dat
+fi
+if [ ! -d "$OUTDIR/dat-files" ]; then
+	mkdir -p $OUTDIR/dat-files
+fi
+if [ ! -d "$OUTDIR/final-prediction" ]; then
+	mkdir -p $OUTDIR/final-prediction
+fi
+
+if [ ! -d "$OUTDIR/plot" ]; then
+	mkdir -p $OUTDIR/plot
+fi
+
+resfile_loctree2=$OUTDIR/prediction/${rootname_seqfile}.lc2.res
 
 echo "RUNNING LOCTREE2"
 loctree2 --fasta $SEQFILE --blastmat $pssmfile --resfile $resfile_loctree2 --domain $domain
@@ -55,6 +69,7 @@ if [ -s $resfile_loctree2 ];then
 	success1=1
 else
 	echo "Failed to run loctree2, resfile_loctree2 $resfile_loctree2 does not exist or empty" >&2
+	mv $resfile_loctree2 $TMPDIR/
 fi
 
 resfile_sherloc2=$OUTDIR/prediction/${rootname_seqfile}.s2.res
@@ -70,6 +85,7 @@ if [ -s $resfile_sherloc2 ];then
 	success2=1
 else
 	echo "Failed to run Sherloc2, resfile_sherloc2 $resfile_sherloc2 does not exist or empty" >&2
+	mv $resfile_sherloc2 $TMPDIR/
 fi
 
 resfile_multiloc2=$OUTDIR/prediction/${rootname_seqfile}.m2.res
@@ -85,6 +101,7 @@ if [ -s $resfile_multiLoc2 ];then
 	success3=1
 else
 	echo "Failed to run multiLoc2, resfile_multiLoc2 $resfile_multiLoc2 does not exist or empty" >&2
+	mv $resfile_multiloc2 $TMPDIR/
 fi
 
 
@@ -92,7 +109,7 @@ resfile_yloc=$OUTDIR/prediction/${rootname_seqfile}.y.res
 
 if [ $success3 -eq 1 ];then
 	echo "RUNNING YLOC"
-	#python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc
+	python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc
 
 fi
 
@@ -102,6 +119,7 @@ if [ -s $resfile_yloc ];then
 	success4=1
 else
 	echo "Failed to run yloc, resfile_yloc $resfile_yloc does not exist or empty" >&2
+	mv $resfile_yloc $TMPDIR/
 fi
 
 resfile_cello=$OUTDIR/prediction/${rootname_seqfile}.c.res
@@ -118,6 +136,7 @@ if [ -s $resfile_cello ];then
 	success5=1
 else
 	echo "Failed to run cello, resfile_cello $resfile_cello does not exist or empty" >&2
+	mv $resfile_cello $TMPDIR/
 fi
 
 

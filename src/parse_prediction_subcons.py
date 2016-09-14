@@ -116,7 +116,7 @@ def parse_cello(cello,filename):
 		for k,v in dic_pred.iteritems():
 			k =  k.strip('\n')
 			for loc1,s in v.iteritems():
-				score = round(sum(set(s))/8,2)
+				score = round(sum(set(s))/8,3)
 				if not k in dic_cello:
 					dic_cello[k]={}
 					dic_cello[k][loc1]=score
@@ -183,7 +183,7 @@ def parse_multiloc2(multiloc2,filename):
 			d.pop('peroxisomal')
 			a = float(x[0])
 			b = float(x[1])
-			x1 = round(float(a+b),2)
+			x1 = round(float(a+b),3)
 			d['VES']=x1
 			d3 = {v2:v for k2,v2 in dic_multiloc2_loc.iteritems() for k,v in d.iteritems() if k==k2}
 			dic_multiloc2[ids]=d3
@@ -204,7 +204,7 @@ def parse_sherloc2(sherloc2,filename):
 			d4.pop('peroxisomal')
 			a = float(x[0])
 			b = float(x[1])
-			x1 = round(float(a+b),2)
+			x1 = round(float(a+b),3)
 			d4['VES']=x1
 			d5 = {v2:v for k2,v2 in dic_sherloc2_loc.iteritems() for k,v in d4.iteritems() if k==k2}
 			dic_sherloc2[ids]=d5
@@ -219,7 +219,7 @@ def parse_yloc(yloc,filename):
 			sp_id1 = line.split(',')[0].strip('\n')
 			loc = line.split(',')[1].split(' ')[0].strip('\n')
 			score = line.split(',')[1].split('(')[1].replace(')','').replace('%','')
-			score = round(float(score)/100,2)
+			score = round(float(score)/100,3)
 			if loc in dic_yloc_loc.keys():
 				loc = loc.replace(loc,dic_yloc_loc[loc])
 				if not sp_id1 in dic_yloc:

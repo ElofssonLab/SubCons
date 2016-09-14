@@ -111,7 +111,7 @@ for el in os.listdir(sys.argv[1]+"/dat-files/"):
 			subcons_prediction = str(predictions[i]).replace(str(predictions[i]),loc_types_2[str(predictions[i])])
 			#PRINT ALL THE PROBABILITIES FOR ALL THE LOCALIZATIONS
 			print "id_protein"+"\t"+"LOC_DEF"+"\t"+"CYT"+"\t"+"ERE"+"\t"+"EXC"+"\t"+"GLG"+"\t"+"MEM"+"\t"+"MIT"+"\t"+"NUC"+"\t"+"VES"
-			print id_protein[i]+"\t"+str(subcons_prediction)+"\t"+str(round(float(probs[i][0]),2))+"\t"+str(round(float(probs[i][1]),2))+"\t"+str(round(float(probs[i][2]),2))+"\t"+str(round(float(probs[i][3]),2))+"\t"+str(round(float(probs[i][4]),2))+"\t"+str(round(float(probs[i][5]),2))+"\t"+str(round(float(probs[i][6]),2))+"\t"+str(round(float(probs[i][7]),2))
+			print id_protein[i]+"\t"+str(subcons_prediction)+"\t"+str(round(float(probs[i][0]),3))+"\t"+str(round(float(probs[i][1]),3))+"\t"+str(round(float(probs[i][2]),3))+"\t"+str(round(float(probs[i][3]),3))+"\t"+str(round(float(probs[i][4]),3))+"\t"+str(round(float(probs[i][5]),3))+"\t"+str(round(float(probs[i][6]),3))+"\t"+str(round(float(probs[i][7]),3))
 			#PRINT ONLY THE FINAL LOCALIZATION DECIDED BY SUBCONS
 			#print id_protein[i],subcons_prediction
 		

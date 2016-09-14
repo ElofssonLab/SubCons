@@ -94,7 +94,8 @@ sleep 1
 
 echo "Plot Results"
 
-python src/plot_results.py $OUTDIR
+python src/create_dataframe_plot.py $OUTDIR
+Rscript src/plot.R $OUTDIR/plot
 
 echo "REMOVE UNNECESSARY INTERMEDIATE FILES"
 rm $OUTDIR/prediction/*.res 
