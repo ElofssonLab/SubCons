@@ -114,7 +114,7 @@ for el in os.listdir(sys.argv[1]+"/for-dat/"):
 	all_list.append(el)
 	predictor_used = el.split('.')[1]
 	predictor_list.append(predictor_used)
-	predictor_list= sorted(set(predictor_list))
+	predictor_list= sorted(set(predictor_list),reverse= True)
 	if name_file in dic_all:
 		dic_all[name_file].append(el)
 	if not name_file in dic_all:

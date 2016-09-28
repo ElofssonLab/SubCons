@@ -117,6 +117,8 @@ for el in os.listdir(sys.argv[1]+"/dat-files/"):
 		
 	sys.stdout=saveout
 	ff1.close()
+
+predictor_list= sorted(set(predictor_list),reverse= True)
 print predictor_list
 
 
