@@ -3,7 +3,6 @@ SubCons
 This is the standalone version of web-server http://subcons.net. This software package is supposed to be run on Ubuntu x64 system. It might also work on other Linux boxes but have not been tested.
 
 If you are interested in running SubCons on other systems, please contact Arne Elofsson (arne@bioinfo.se)
-Description
 
 SubCon is a new ensemble method for improved subcellular localization prediction in Human.
 
@@ -12,6 +11,13 @@ The software is open source and licensed under the GPL license.
 Reference
 
 Salvatore, M., Warholm, P., Shu, N., Basile, W., Elofsson, A., 2015. SubCons: a new ensemble method for improved subcellular localization predictions.
+
+NOTE: SubCons runs PRODRES our new programm that generatares PSSM profile very fast and with the same accuracy of Psi-Blast
+      We suggest to read carefully the instruction and install it!
+      However, SubCons runs Psi-Blast as alternative to PRODRES (THIS MAKE SUBCONS MUCH SLOWER)
+
+Description
+
 Installation and usage:
 
 Check out the software from the github by
@@ -23,12 +29,11 @@ Install dependencies if not installed
 	numpy
 	scipy
 	sklearn
-	ZSI
-	mechanize
+	python-ZSI
+	python-mechanize
 	pandas
 	matplotlib
 	itertools
-	pd
 	time
 	collections
 	pickle
@@ -36,19 +41,23 @@ Install dependencies if not installed
 	R library reshape
 	ncbi-blast+ or blast2
 	libsvm 
+	pp-popularity-contest
 
 INSTALL libsvm FOR SherLoc2 & MultiLoc2
 
 	git clone https://github.com/cjlin1/libsvm.git # then open cd libsvm/ and type : make all
 	
-  NOTE: after download and install svm-predict & co must be move in /usr/bin on your local machine
+ 	NOTE: after download and install svm-predict & co must be moved in /usr/bin on your local machine
 
 INSTALL BLAST PACKAGE 
 
 	sudo apt-get install ncbi-blast+ 
 	sudo apt-get install blast2
 
-INSTALL FastPSSM (Nanjiang could you add this?)
+INSTALL PRODRES 
+	
+	Download (or clone) the PRODRES Git repository ("https://github.com/ElofssonLab/PRODRES")
+	Follow the instruction written in the README.md in the PRODRES REPOSITORY at "https://github.com/ElofssonLab/PRODRES"	
 
 INSTALL MUltiLoc2: 
 
@@ -62,9 +71,9 @@ INSTALL YLoc: (NOT WORKING)
 	
 	Use "wsdl2py" to create YLocSOAP_services.py and YLocSOAP_services_types.py
 
-NO INSTALLATION NEEDED FOR CELLO2.5 since runs through the script in /TOOLS/cello.py 	
+NO INSTALLATION NEEDED FOR CELLO2.5 since runs through the script in /TOOLS/cello.py
 
-WE PROVIDE MultiLoc2, SherLoc2, YLoc and CELLO2.5 but follow the instruction to install LocTree2
+WE PROVIDE MultiLoc2, SherLoc2, YLoc, CELLO2.5 insted for LocTree2 follow the instruction (if something goes wrong refer to https://rostlab.org/owiki/index.php/Packages)
 
 INSTALL LocTree2 TYPE FROM THE COMMAND LINE THE FOLLOWING:
 
@@ -79,7 +88,7 @@ YOU ALSO NEED loctree2-data so download using:
 
 	1-) wget ftp://rostlab.org/free/loctree2-data-1.0.2.tar.gz
 
-	2-) untar this file in /usr/share 
+	2-) untar this file in /usr/share using "sudo tar -C /usr/share/ -zxvf loctree2-data-1.0.2.tar.gz"
 
 NOTE: IF YOU GOT AN ERROR LIKE THIS WHEN INSTALLING LocTree2: Cannot set LC_CTYPE to default locale: No such file or directory
 You maybe need to type in the terminal this command:
@@ -95,12 +104,13 @@ NOTE:
 
 To run SubCons after the installation type:
 	
-	$ bash batch_subcons.sh SEQFILE OUTDIR TMPDIR
+	$ ./batch_subcons.sh SEQFILE OUTDIR TMPDIR
 	NOTE:  You do not need to specify tha fasta name/seq; SubCons will automatically take the sequence(s) in the folder SEQFILE
 
 NOTE:
 
-	The results can be found in the folders '/SubCons-web-server/RESULTS/final-prediction' in which you have the only the final prediction of SubCons  and    in '/SubCons-web-server/RESULTS/plot' in which 		you have both graphically and as csv file with the score for each single predictor and SubCons
+	The final prediction(s) of SubCons can be found in the folders '/SubCons-web-server/RESULTS/final-prediction' & in '/SubCons-web-server/RESULTS/plot'. 
+	The Latest contains both a stacked-barplot and a csv file with the score for each single predictor and SubCons
 
 
 
