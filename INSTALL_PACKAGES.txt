@@ -1,14 +1,21 @@
-This are all the programs and libraries that need to be installed in the virtual environment"
+#These are all the programs and libraries that need to be installed in the virtual environment
+# For Ubuntu
 
-sudo apt-get python-pip
+sudo apt-get install -y python-pip
+sudo apt-get install -y python-dev
 
-sudo pip install numpy
-sudo pip install scipy
-sudo pip install sklearn
-sudo pip install ZSI
-sudo pip install mechanize
-sudo pip install pandas
-sudo pip install matplotlib
+sudo -H pip install numpy
+sudo -H pip install scipy
+sudo -H pip install sklearn
+
+# install PyXML from source for ZSI
+# get the 
+# wget https://sourceforge.net/projects/pyxml/files/pyxml/0.8.4/PyXML-0.8.4.tar.gz 
+sudo -H pip install ZSI
+
+sudo -H pip install mechanize
+sudo -H pip install pandas
+sudo -H pip install matplotlib
 
 #INSTALL LIBSVM FOR SHERLOC2 & MULTILOC2
 git clone https://github.com/cjlin1/libsvm.git # then open cd libsvm/ and type : make all
@@ -48,6 +55,6 @@ python TOOLS/MultiLoc2/configureML2.py
 
 # TO INSTALL SHERLOC2:
 
-python TOOLS/MultiLoc2/ configureSL2.py
+python TOOLS/SherLoc2/configureSL2.py
 
 # YLOC HAS BEEN ALREADY SETTED

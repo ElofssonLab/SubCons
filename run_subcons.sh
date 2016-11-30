@@ -4,11 +4,14 @@ usage="
 USAGE: $0 SEQFILE OUTDIR TMPDIR
 "
 
+VERBOSE=1
+
 domain=euka
 
 rundir=`dirname $0`
+rundir=$(readlink -f $rundir)
 
-cd $rundir
+#cd $rundir
 
 if [ $# -lt 3 ];then
 	echo "$usage"
@@ -19,7 +22,21 @@ SEQFILE=$1
 OUTDIR=$2
 TMPDIR=$3
 
-RUNTOOL=TOOLS
+
+SEQFILE=$(readlink -f $SEQFILE)
+OUTDIR=$(readlink -f $OUTDIR)
+TMPDIR=$(readlink -f $TMPDIR)
+
+
+RUNTOOL=$rundir/TOOLS
+
+exec_cmd(){
+    case $VERBOSE in 
+        yes|1)
+        echo -e "\n$*\n"
+    esac
+    eval "$*"
+}
 
 #GetPSSMFile{
 #	/bin/cp $OUTDIR/*.pssm
@@ -59,24 +76,28 @@ if [ ! -d "$OUTDIR/plot" ]; then
 	mkdir -p $OUTDIR/plot
 fi
 
+if [ ! -d "$TMPDIR" ]; then
+	mkdir -p $TMPDIR
+fi
+
 resfile_loctree2=$OUTDIR/prediction/${rootname_seqfile}.lc2.res
 
 echo "RUNNING LOCTREE2"
-loctree2 --fasta $SEQFILE --blastmat $pssmfile --resfile $resfile_loctree2 --domain $domain
+exec_cmd "loctree2 --fasta $SEQFILE --blastmat $pssmfile --resfile $resfile_loctree2 --domain $domain"
 
 success1=0
 if [ -s $resfile_loctree2 ];then
 	success1=1
 else
 	echo "Failed to run loctree2, resfile_loctree2 $resfile_loctree2 does not exist or empty" >&2
-	mv $resfile_loctree2 $TMPDIR/
+	exec_cmd "mv $resfile_loctree2 $TMPDIR/"
 fi
 
 resfile_sherloc2=$OUTDIR/prediction/${rootname_seqfile}.s2.res
 
 if [ $success1 -eq 1 ];then
 	echo "RUNNING SHERLOC2"
-	python $RUNTOOL/SherLoc2/src/sherloc2_prediction.py -fasta=$SEQFILE -origin=animal -output=simple -result=$resfile_sherloc2
+	exec_cmd "python $RUNTOOL/SherLoc2/src/sherloc2_prediction.py -fasta=$SEQFILE -origin=animal -output=simple -result=$resfile_sherloc2"
 fi
 
 
@@ -85,14 +106,14 @@ if [ -s $resfile_sherloc2 ];then
 	success2=1
 else
 	echo "Failed to run Sherloc2, resfile_sherloc2 $resfile_sherloc2 does not exist or empty" >&2
-	mv $resfile_sherloc2 $TMPDIR/
+	exec_cmd "mv $resfile_sherloc2 $TMPDIR/"
 fi
 
 resfile_multiloc2=$OUTDIR/prediction/${rootname_seqfile}.m2.res
 
 if [ $success2 -eq 1 ];then
 	echo "RUNNING MULTILOC2"
-	python $RUNTOOL/MultiLoc2/src/multiloc2_prediction.py -fasta=$SEQFILE -origin=animal -output=simple -result=$resfile_multiloc2
+	exec_cmd "python $RUNTOOL/MultiLoc2/src/multiloc2_prediction.py -fasta=$SEQFILE -origin=animal -output=simple -result=$resfile_multiloc2"
 fi
 
 
@@ -101,7 +122,7 @@ if [ -s $resfile_multiLoc2 ];then
 	success3=1
 else
 	echo "Failed to run multiLoc2, resfile_multiLoc2 $resfile_multiLoc2 does not exist or empty" >&2
-	mv $resfile_multiloc2 $TMPDIR/
+	exec_cmd "mv $resfile_multiloc2 $TMPDIR/"
 fi
 
 
@@ -109,7 +130,7 @@ resfile_yloc=$OUTDIR/prediction/${rootname_seqfile}.y.res
 
 if [ $success3 -eq 1 ];then
 	echo "RUNNING YLOC"
-	python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc
+	exec_cmd "python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc"
 
 fi
 
@@ -119,14 +140,14 @@ if [ -s $resfile_yloc ];then
 	success4=1
 else
 	echo "Failed to run yloc, resfile_yloc $resfile_yloc does not exist or empty" >&2
-	mv $resfile_yloc $TMPDIR/
+	exec_cmd "mv $resfile_yloc $TMPDIR/"
 fi
 
 resfile_cello=$OUTDIR/prediction/${rootname_seqfile}.c.res
 
 if [ $success3 -eq 1 ];then
 	echo "RUNNING CELLO"
-	python $RUNTOOL/cello.py $SEQFILE > $resfile_cello
+	exec_cmd "python $RUNTOOL/cello.py $SEQFILE > $resfile_cello"
 
 fi
 
@@ -136,7 +157,7 @@ if [ -s $resfile_cello ];then
 	success5=1
 else
 	echo "Failed to run cello, resfile_cello $resfile_cello does not exist or empty" >&2
-	mv $resfile_cello $TMPDIR/
+	exec_cmd "mv $resfile_cello $TMPDIR/"
 fi
 
 
