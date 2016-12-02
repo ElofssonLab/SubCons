@@ -1,7 +1,7 @@
 import re,sys,os,string, time, util
 
 svm_path=""
-tmpfile_path="/media/storage/software/subcons/TOOLS/SherLoc2/tmp/"
+tmpfile_path=os.environ['TMP_SHERLOC']
 
 all_animal_go_terms = []
 all_fungi_go_terms = []

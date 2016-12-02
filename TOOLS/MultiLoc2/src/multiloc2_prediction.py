@@ -1,7 +1,9 @@
 import string, sys, os, getopt, smtplib, math
 import cgi,re,time,posix
 
-src_path="/media/storage/software/subcons/TOOLS/MultiLoc2/src/"
+rundir=os.path.dirname(os.path.realpath(__file__))
+basedir=os.path.realpath("%s/../"%(rundir))
+src_path=rundir
 
 sys.path.append(src_path)
 
@@ -12,6 +14,11 @@ multiloc2_mode= "stand-alone"
 
 sender_address = 'blum@informatik.uni-tuebingen.de'
 email = ""
+
+def run_shell_command(cmd):
+        stdout_handle = os.popen(cmd, "r")
+        ss =  re.sub("\n","",stdout_handle.read()) 
+        return ss.strip().rstrip("/")
 
 def create_prediction_id():
 	return "ml" + str(time.time())
@@ -70,11 +77,11 @@ def multiloc2_create_feature_vector(predictor,origin, fastafile, go_file_names, 
 		use_inter_pro_scan = 0
 	feature_vector = []
 	print "create feature vectors"
-	libsvm_path="/media/storage/env/bin/"
+	libsvm_path=os.path.dirname(run_shell_command("which svm-predict"))+"/"
 	inter_pro_scan_path=""
-	blast_path="/usr/bin/"
-	genome_path="/media/storage/software/subcons/TOOLS/MultiLoc2/data/NCBI/"
-	svm_data_path="/media/storage/software/subcons/TOOLS/MultiLoc2/data/svm_models/MultiLoc2/"
+	blast_path=os.path.dirname(run_shell_command("which blastall"))+"/"
+	genome_path="%s/data/NCBI/"%(basedir)
+	svm_data_path="%s/data/svm_models/MultiLoc2/"%(basedir)
 	util.validate_not_empty([libsvm_path,blast_path,genome_path,svm_data_path])
 	if use_inter_pro_scan == 1:
 		util.validate_not_empty([inter_pro_scan_path])
@@ -421,8 +428,8 @@ def multiloc2_create_feature_vector(predictor,origin, fastafile, go_file_names, 
 def multiloc2_predict_location(predictor,origin, feature_vector, model, prediction_id):
 	print "run MultiLoc2"
 	result = []
-	libsvm_path="/media/storage/env/bin/"
-	svm_data_path="/media/storage/software/subcons/TOOLS/MultiLoc2/data/svm_models/MultiLoc2/"
+        libsvm_path=os.path.dirname(run_shell_command("which svm-predict"))+"/"
+	svm_data_path="%s/data/svm_models/MultiLoc2/"%(basedir)
 	if origin == "animal":
 		if predictor == "MultiLoc2.11":
 			svm_model_path = svm_data_path+"/benchmark80_animal_multiloc_with_new_svmaac_join_phylo_G78BS_join_go/"

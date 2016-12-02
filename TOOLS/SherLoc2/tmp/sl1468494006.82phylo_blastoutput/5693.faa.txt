@@ -1,6 +1,0 @@
-# BLASTP 2.2.26 [Sep-21-2011]
-# Query: sp|A0A4Z3|A3LT2_RAT
-# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Eukaryota/5693.faa
-# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
-sp|A0A4Z3|A3LT2_RAT	gi|71403741|ref|XP_804640.1|	50.00	28	14	0	144	171	61	88	6.3	28.1
-sp|A0A4Z3|A3LT2_RAT	gi|71664413|ref|XP_819187.1|	22.60	146	80	6	12	131	772	910	7.0	28.5

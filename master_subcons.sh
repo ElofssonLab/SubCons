@@ -41,7 +41,12 @@ SEQFILE=$(readlink -f $SEQFILE)
 OUTDIR=$(readlink -f $OUTDIR)
 
 
-TMPDIR=$OUTDIR/tmp
+TMPDIR=$OUTDIR/tmp/
+TMP_MULTILOC=$OUTDIR/tmp/tmp_MULTILOC/
+TMP_SHERLOC=$OUTDIR/tmp/tmp_SHERLOC/
+
+export TMP_MULTILOC
+export TMP_SHERLOC
 
 RUNTOOL=$rundir/TOOLS
 
@@ -86,6 +91,12 @@ fi
 
 if [ ! -d "$TMPDIR" ]; then
 	mkdir -p $TMPDIR
+fi
+if [ ! -d "$TMP_SHERLOC" ]; then
+	mkdir -p $TMP_SHERLOC
+fi
+if [ ! -d "$TMP_MULTILOC" ]; then
+	mkdir -p $TMP_MULTILOC
 fi
 
 

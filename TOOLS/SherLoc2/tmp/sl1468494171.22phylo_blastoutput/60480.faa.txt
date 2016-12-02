@@ -1,5 +1,0 @@
-# BLASTP 2.2.26 [Sep-21-2011]
-# Query: sp|A0A8M2|L14AA_XENLA
-# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Bacteria/all/60480.faa
-# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
-sp|A0A8M2|L14AA_XENLA	gi|113969882|ref|YP_733675.1|	27.50	80	56	1	315	394	346	423	3.9	26.9

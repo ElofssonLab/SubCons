@@ -1,6 +1,6 @@
 import re, os, sys, string, util
 
-tmpfile_path="/media/storage/software/subcons/TOOLS/MultiLoc2/tmp/"
+tmpfile_path=os.environ['TMP_MULTILOC']
 
 def create_pattern_aac(sequence,klasse):
 	pattern = []

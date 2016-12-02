@@ -1,7 +1,0 @@
-# BLASTP 2.2.26 [Sep-21-2011]
-# Query: sp|A0A0C5B5G6|MOTSC_HUMAN
-# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Archaea/187420.faa
-# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
-sp|A0A0C5B5G6|MOTSC_HUMAN	gi|15679420|ref|NP_276537.1|	47.06	17	7	1	2	16	93	109	1.5	20.4
-sp|A0A0C5B5G6|MOTSC_HUMAN	gi|15678466|ref|NP_275581.1|	60.00	10	4	0	2	11	61	70	4.3	18.5
-sp|A0A0C5B5G6|MOTSC_HUMAN	gi|15679597|ref|NP_276714.1|	71.43	7	2	0	2	8	453	459	5.1	18.5
