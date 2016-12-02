@@ -112,8 +112,7 @@ def parse_cello(cello,filename):
 				if k in dic_cello:
 					dic_cello[k][loc1]=score
 		cello_df = pd.DataFrame(dic_cello).T
-		print cello_df
-		cello_df.to_csv(sys.argv[1]+'/for-dat/'+str(filename)+'.cello.csv', sep='\t', encoding='utf-8')
+		cello_df.to_csv(sys.argv[1]+'for-dat/'+str(filename)+'.cello.csv', sep='\t', encoding='utf-8')
 	except:
 		pass
 
@@ -178,7 +177,7 @@ def parse_multiloc2(multiloc2,filename):
 			dic_multiloc2[ids]=d3
 	
 	multiloc2_df = pd.DataFrame(dic_multiloc2).T
-	multiloc2_df.to_csv(sys.argv[1]+'/for-dat/'+str(filename)+'.multiloc2.csv', sep='\t', encoding='utf-8')
+	multiloc2_df.to_csv(sys.argv[1]+'for-dat/'+str(filename)+'.multiloc2.csv', sep='\t', encoding='utf-8')
 
 def parse_sherloc2(sherloc2,filename):
 	dic_sherloc2 = {}
@@ -199,7 +198,7 @@ def parse_sherloc2(sherloc2,filename):
 			dic_sherloc2[ids]=d5
 	
 	sherloc2_df = pd.DataFrame(dic_sherloc2).T
-	sherloc2_df.to_csv(sys.argv[1]+'/for-dat/'+str(filename)+'.sherloc2.csv', sep='\t', encoding='utf-8')
+	sherloc2_df.to_csv(sys.argv[1]+'for-dat/'+str(filename)+'.sherloc2.csv', sep='\t', encoding='utf-8')
 
 def parse_yloc(yloc,filename):
 	dic_yloc = {}
@@ -238,39 +237,38 @@ def parse_yloc(yloc,filename):
 	    		yloc_df[col_in_yloc] = 0.0
 		yloc_df = yloc_df.fillna(0.0)
 		yloc_df = yloc_df.sort_index(axis=1)
-		yloc_df.to_csv(sys.argv[1]+'/for-dat/'+str(filename)+'.yloc.csv', sep='\t', encoding='utf-8')
+		yloc_df.to_csv(sys.argv[1]+'for-dat/'+str(filename)+'.yloc.csv', sep='\t', encoding='utf-8')
 	
 	except:
 		pass
 	
 			
 	
-path_results = sys.argv[1]+'/prediction/'
+path_results = sys.argv[1]+'prediction/'
 paths_results = glob.glob(path_results+'*.*.res')
 print paths_results
 
 for el in paths_results:
-	name_file = el.split('/')[2].split('.')[0]
-	predictor_used = el.split('/')[2]
+	name_file = el.split('/')[-1].split('.')[0]
+	predictor_used = el.split('/')[-1]
 	if predictor_used.endswith(".lc2.res"):
-		file_pred = open(sys.argv[1]+'/prediction/'+str(predictor_used))
+		file_pred = open(sys.argv[1]+'prediction/'+str(predictor_used))
 		parse_loctree2(file_pred,name_file)	
 			
 	if predictor_used.endswith(".s2.res"):
-		file_pred = open(sys.argv[1]+'/prediction/'+str(predictor_used))
+		file_pred = open(sys.argv[1]+'prediction/'+str(predictor_used))
 		parse_sherloc2(file_pred,name_file)	
 		
 	if predictor_used.endswith(".m2.res"):
-		file_pred = open(sys.argv[1]+'/prediction/'+str(predictor_used))
+		file_pred = open(sys.argv[1]+'prediction/'+str(predictor_used))
 		parse_multiloc2(file_pred,name_file)
 		
 	if predictor_used.endswith(".c.res"):
-		print True
-		file_pred = open(sys.argv[1]+'/prediction/'+str(predictor_used))
+		file_pred = open(sys.argv[1]+'prediction/'+str(predictor_used))
 		parse_cello(file_pred,name_file)
 	
 	if predictor_used.endswith(".y.res"):
-		file_pred = open(sys.argv[1]+'/prediction/'+str(predictor_used))
+		file_pred = open(sys.argv[1]+'prediction/'+str(predictor_used))
 		parse_yloc(file_pred,name_file)
 		
 
