@@ -8,12 +8,16 @@
 #									                                     #					
 ##########################################################################
 
-import sys,os
+import sys
+import os
 import pickle
+
+rundir = os.path.dirname(os.path.realpath(__file__))
+basedir = os.path.realpath("%s/../"%(rundir))
 
 # in case the pickle library does not work use:
 #from sklearn.externals import joblib
-#EXAMPLE : f = joblib.load(open('forests/forest-slycm.dat',"rb")
+#EXAMPLE : f = joblib.load(open('%s/forests/forest-slycm.dat'%(basedir),"rb")
 
 if not len(sys.argv) == 2:
   print "Usage:",sys.argv[0],"test_file"
@@ -57,26 +61,26 @@ def take_ids(handle):
 def peak_correct_forest(list_pred):
 	global f
 	if len(list_pred)==5:
-		f = pickle.load(open('forests/forest-slycm.dat',"rb"))
-		#f = joblib.load(open('forests/forest-slycm.dat',"rb") 
+		f = pickle.load(open('%s/forests/forest-slycm.dat'%(basedir),"rb"))
+		#f = joblib.load(open('%s/forests/forest-slycm.dat'%(basedir),"rb") 
 		return f
 		
 	elif len(list_pred)== 4 :
 		try :
 			if str("cello") in list_pred:					
-				f = pickle.load(open('forests/forest-slmc.dat',"rb"))
-				#f = joblib.load(open('forests/forest-slycm.dat',"rb") 
+				f = pickle.load(open('%s/forests/forest-slmc.dat'%(basedir),"rb"))
+				#f = joblib.load(open('%s/forests/forest-slycm.dat'%(basedir),"rb") 
 				return f
 			else:
-				f = pickle.load(open('forests/forest-slmy.dat',"rb"))
-				#f = joblib.load(open('forests/forest-slycm.dat',"rb") 
+				f = pickle.load(open('%s/forests/forest-slmy.dat'%(basedir),"rb"))
+				#f = joblib.load(open('%s/forests/forest-slycm.dat'%(basedir),"rb") 
 				return f				
 		except:
 			pass
 			
 	elif len(list_pred) == 3:
-		f = pickle.load(open('forests/forest-slm.dat',"rb"))
-		#f = joblib.load(open('forests/forest-slycm.dat',"rb") 
+		f = pickle.load(open('%s/forests/forest-slm.dat'%(basedir),"rb"))
+		#f = joblib.load(open('%s/forests/forest-slycm.dat'%(basedir),"rb") 
 		return f
 
 

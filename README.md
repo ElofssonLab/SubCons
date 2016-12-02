@@ -1,6 +1,6 @@
 SubCons
 
-This is the standalone version of web-server http://subcons.net. This software package is supposed to be run on Ubuntu x64 system. It might also work on other Linux boxes but have not been tested.
+This is the standalone version of web-server http://subcons.bioinfo.se. This software package is supposed to be run on Ubuntu x64 system. It might also work on other Linux boxes but have not been tested.
 
 If you are interested in running SubCons on other systems, please contact Arne Elofsson (arne@bioinfo.se)
 
@@ -58,6 +58,11 @@ INSTALL PRODRES
 	
 	Download (or clone) the PRODRES Git repository ("https://github.com/ElofssonLab/PRODRES")
 	Follow the instruction written in the README.md in the PRODRES REPOSITORY at "https://github.com/ElofssonLab/PRODRES"	
+	After installation of of PRODRES, make a symlink to the location of PRODRES in the subfolder `apps`
+
+	```
+	ln -s PATH-TO-PRODRES PATH-TO-SUBCONS/apps/PRODRES
+	```
 
 INSTALL MUltiLoc2: 
 
