@@ -104,8 +104,8 @@ NOTE:
 
 To run SubCons after the installation type:
 	
-	$ ./batch_subcons.sh SEQFILE OUTDIR TMPDIR
-	NOTE:  You do not need to specify tha fasta name/seq; SubCons will automatically take the sequence(s) in the folder SEQFILE
+	$ bash master_subcons.sh SEQFILE/test.fasta OUTDIR/ JUNK
+	
 
 NOTE:
 
