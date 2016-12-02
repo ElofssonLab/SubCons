@@ -36,12 +36,19 @@ def predictors_merged_dataframe(list_pred,a):
 		cols = df_all.columns.tolist()
 		cols = cols[-1:] + cols[:-1]
 		df_all = df_all[cols]
-		df_all.Tools.loc[df_all.Tools=='cello']='CELLO2.5'
-		df_all.Tools.loc[df_all.Tools=='sherloc2']='SherLoc2'
-		df_all.Tools.loc[df_all.Tools=='multiloc2']='MultiLoc2'
-		df_all.Tools.loc[df_all.Tools=='loctree2']='LocTree2'
-		df_all.Tools.loc[df_all.Tools=='yloc']='YLoc'
-		df_all.to_csv(sys.argv[1]+'/plot/'+str(predictor1["Unnamed: 0"][0])+'.csv', sep='\t', encoding='utf-8')
+                df_all.set_index("Tools", drop=True, inplace=True)
+                dictionary = df_all.to_dict(orient = "index")
+                dictionary['LocTree2'] = dictionary.pop('loctree2')
+                dictionary['MultiLoc2'] = dictionary.pop('multiloc2')
+                dictionary['SherLoc2'] = dictionary.pop('sherloc2')
+                dictionary['YLoc'] = dictionary.pop('yloc')
+                dictionary['CELLO2.5'] = dictionary.pop('cello')
+                df_finished= pd.DataFrame(dictionary)
+                df_finished =  df_finished.T
+                final_columns = df_finished.columns[df_finished.ix[df_finished.last_valid_index()].argsort()]
+                df_finished = df_finished[final_columns]
+                df_finished.to_csv(sys.argv[1]+'/plot/'+str(predictor1["Unnamed: 0"][0])+'.csv', sep='\t', encoding='utf-8')
+
 		
 	elif len(list_pred)==4:
 		list_pred = sorted(list_pred)
@@ -66,7 +73,6 @@ def predictors_merged_dataframe(list_pred,a):
 		cols = df_all.columns.tolist()
 		cols = cols[-1:] + cols[:-1]
 		df_all = df_all[cols]
-		print df_all
 		df_all.set_index("Tools", drop=True, inplace=True)
 		dictionary = df_all.to_dict(orient = "index")
 		dictionary['LocTree2'] = dictionary.pop('loctree2')
@@ -80,7 +86,6 @@ def predictors_merged_dataframe(list_pred,a):
 		df_finished =  df_finished.T
 		final_columns = df_finished.columns[df_finished.ix[df_finished.last_valid_index()].argsort()]
 		df_finished = df_finished[final_columns]
-		print df_finished
 		df_finished.to_csv(sys.argv[1]+'/plot/'+str(predictor1["Unnamed: 0"][0])+'.csv', sep='\t', encoding='utf-8')
 		
 	elif len(list_pred) == 3:
@@ -105,10 +110,17 @@ def predictors_merged_dataframe(list_pred,a):
 		cols = df_all.columns.tolist()
 		cols = cols[-1:] + cols[:-1]
 		df_all = df_all[cols]
-		df_all.Tools.loc[df_all.Tools=='sherloc2']='SherLoc2'
-		df_all.Tools.loc[df_all.Tools=='multiloc2']='MultiLoc2'
-		df_all.Tools.loc[df_all.Tools=='loctree2']='LocTree2'
-		df_all.to_csv(sys.argv[1]+'/plot/'+str(predictor1["Unnamed: 0"][0])+'.csv', sep='\t', encoding='utf-8')
+                df_all.set_index("Tools", drop=True, inplace=True)
+                dictionary = df_all.to_dict(orient = "index")
+                dictionary['LocTree2'] = dictionary.pop('loctree2')
+                dictionary['MultiLoc2'] = dictionary.pop('multiloc2')
+                dictionary['SherLoc2'] = dictionary.pop('sherloc2')
+                df_finished= pd.DataFrame(dictionary)
+                df_finished =  df_finished.T
+                final_columns = df_finished.columns[df_finished.ix[df_finished.last_valid_index()].argsort()]
+                df_finished = df_finished[final_columns]
+                df_finished.to_csv(sys.argv[1]+'/plot/'+str(predictor1["Unnamed: 0"][0])+'.csv', sep='\t', encoding='utf-8')
+
 
 
 	
