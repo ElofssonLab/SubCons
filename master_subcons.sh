@@ -10,7 +10,7 @@ domain=euka
 
 rundir=`dirname $0`
 rundir=$(readlink -f $rundir)
-
+echo $rundir
 #cd $rundir
 
 if [ $# -lt 3 ];then
@@ -28,10 +28,10 @@ TMPDIR=$(readlink -f $TMPDIR)
 
 
 RUNTOOL=$rundir/TOOLS
-PRODRES_PATH=/media/storage/software/PRODRES/
+PRODRES_PATH=/media/storage/software/PRODRES
 
 exec_cmd(){
-    case $VERBOSE in 
+    case $VERBOSE in
         yes|1)
         echo -e "\n$*\n"
     esac
@@ -202,37 +202,37 @@ if [ -e $resfile_loctree2 -a -e $resfile_sherloc2 -a -e $resfile_loctree2 ];then
 	echo "files here proceed"
 
 	echo "Parse prediction and obtain test file"
-
-	exec_cmd "python $rundir/src/parse_prediction_subcons.py $OUTDIR"
+	echo "$OUTDIR"
+	exec_cmd "python $rundir/src/parse_prediction_subcons.py $OUTDIR/"
 
 	sleep 1
 
 	echo "Create dat file as input for SubCons"
 
-	exec_cmd "python $rundir/src/subcons-file-dat.py $OUTDIR"
+	exec_cmd "python $rundir/src/subcons-file-dat.py $OUTDIR/"
 
 	sleep 1
 
 	echo "Obtain final prediction with SubCons"
 
-	exec_cmd "python $rundir/src/subcons-prediction.py $OUTDIR"
+	exec_cmd "python $rundir/src/subcons-prediction.py $OUTDIR/"
 
 	sleep 1
 
 	echo "Plot Results"
 
-	exec_cmd "python $rundir/src/create_dataframe_plot.py $OUTDIR"
+	exec_cmd "python $rundir/src/create_dataframe_plot.py $OUTDIR/"
 	exec_cmd "Rscript $rundir/src/plot.R $OUTDIR/plot"
 
 
 else
         echo "Failed to run LocTree2, MultiLoc2 & SherLoc2" >&2
-        #exec_cmd "mv $resfile_cello $TMPDIR/"
+	exec_cmd "mv  $OUTDIR/* $TMPDIR/"
+
 fi
 
 echo "REMOVE UNNECESSARY INTERMEDIATE FILES"
 
-#rm $OUTDIR/prediction/*.res 
+rm $OUTDIR/prediction/*.res"
 
-#rm $OUTDIR/dat-files/*.dat
-
+rm $OUTDIR/dat-files/*.dat
