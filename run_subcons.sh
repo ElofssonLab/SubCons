@@ -22,13 +22,13 @@ SEQFILE=$1
 OUTDIR=$2
 TMPDIR=$3
 
-
 SEQFILE=$(readlink -f $SEQFILE)
 OUTDIR=$(readlink -f $OUTDIR)
 TMPDIR=$(readlink -f $TMPDIR)
 
 
 RUNTOOL=$rundir/TOOLS
+PRODRES_PATH=/media/storage/software/PRODRES/
 
 exec_cmd(){
     case $VERBOSE in 
@@ -50,14 +50,15 @@ exec_cmd(){
 #	eval "$*"
 #}
 
+
 basename_seqfile=$(basename $SEQFILE)
 rootname_seqfile=${basename_seqfile%.*}
 
-pssmfile=$OUTDIR/$rootname_seqfile.pssm
+pssmfile=$rootname_seqfile
 
-#GetPSSMFile()
 
 #CREATE FOLDER:
+
 if [ ! -d "$OUTDIR/prediction" ]; then
 	mkdir -p $OUTDIR/prediction
 fi
@@ -80,14 +81,30 @@ if [ ! -d "$TMPDIR" ]; then
 	mkdir -p $TMPDIR
 fi
 
+
+echo "CREATE PSSM File"
+exec_cmd "python $PRODRES_PATH/PRODRES/PRODRES.py --input $SEQFILE --output $PRODRES_PATH/PRODRES --pfam-dir $PRODRES_PATH/databases/ --pfamscan-script /usr/bin/pfam_scan.pl --pfamscan_bitscore 2 --uniprot-db-fasta $PRODRES_PATH/databases/uniref90.fasta --second-search psiblast --psiblast_e-val 0.001 --psiblast_iter 3"
+
+resfile_pssm=$PRODRES_PATH/PRODRES/$pssmfile/outputs/psiPSSM.txt
+
+success1=0
+if [ -s $resfile_pssm ];then
+        success1=1
+else
+        echo "Failed to run PRODRES, resfile_pssm $resfile_pssm does not exist or empty" >&2
+        exec_cmd "mv $resfile_pssm $TMPDIR/"
+fi
+
+
 resfile_loctree2=$OUTDIR/prediction/${rootname_seqfile}.lc2.res
 
 echo "RUNNING LOCTREE2"
-exec_cmd "loctree2 --fasta $SEQFILE --blastmat $pssmfile --resfile $resfile_loctree2 --domain $domain"
+#exec_cmd "loctree2 --fasta $SEQFILE --blastmat $OUTDIR --resfile $resfile_loctree2 --domain $domain"
+exec_cmd "loctree2 --fasta $SEQFILE --blastmat $PRODRES_PATH/PRODRES/$pssmfile/outputs/psiPSSM.txt --resfile $resfile_loctree2 --domain $domain"
 
-success1=0
+success2=0
 if [ -s $resfile_loctree2 ];then
-	success1=1
+	success2=1
 else
 	echo "Failed to run loctree2, resfile_loctree2 $resfile_loctree2 does not exist or empty" >&2
 	exec_cmd "mv $resfile_loctree2 $TMPDIR/"
@@ -95,15 +112,15 @@ fi
 
 resfile_sherloc2=$OUTDIR/prediction/${rootname_seqfile}.s2.res
 
-if [ $success1 -eq 1 ];then
+if [ $success2 -eq 1 ];then
 	echo "RUNNING SHERLOC2"
 	exec_cmd "python $RUNTOOL/SherLoc2/src/sherloc2_prediction.py -fasta=$SEQFILE -origin=animal -output=simple -result=$resfile_sherloc2"
 fi
 
 
-success2=0
+success3=0
 if [ -s $resfile_sherloc2 ];then
-	success2=1
+	success3=1
 else
 	echo "Failed to run Sherloc2, resfile_sherloc2 $resfile_sherloc2 does not exist or empty" >&2
 	exec_cmd "mv $resfile_sherloc2 $TMPDIR/"
@@ -111,15 +128,15 @@ fi
 
 resfile_multiloc2=$OUTDIR/prediction/${rootname_seqfile}.m2.res
 
-if [ $success2 -eq 1 ];then
+if [ $success3 -eq 1 ];then
 	echo "RUNNING MULTILOC2"
 	exec_cmd "python $RUNTOOL/MultiLoc2/src/multiloc2_prediction.py -fasta=$SEQFILE -origin=animal -output=simple -result=$resfile_multiloc2"
 fi
 
 
-success3=0
+success4=0
 if [ -s $resfile_multiLoc2 ];then
-	success3=1
+	success4=1
 else
 	echo "Failed to run multiLoc2, resfile_multiLoc2 $resfile_multiLoc2 does not exist or empty" >&2
 	exec_cmd "mv $resfile_multiloc2 $TMPDIR/"
@@ -128,9 +145,9 @@ fi
 
 resfile_yloc=$OUTDIR/prediction/${rootname_seqfile}.y.res
 
-if [ $success3 -eq 1 ];then
+if [ $success4 -eq 1 ];then
 	echo "RUNNING YLOC"
-	exec_cmd "python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc"
+	#exec_cmd "python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc"
 
 fi
 
@@ -162,4 +179,5 @@ fi
 
 
 
-
+exec_cmd "mv $PRODRES_PATH/PRODRES/$pssmfile/outputs/psiPSSM.txt $PRODRES_PATH/PRODRES/$pssmfile/outputs/$pssmfile.pssm"
+exec_cmd "mv $PRODRES_PATH/PRODRES/$pssmfile/outputs/$pssmfile.pssm $OUTDIR/"

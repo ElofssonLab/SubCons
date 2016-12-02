@@ -1,7 +1,7 @@
 import string, sys, os, getopt, smtplib, math
 import cgi,re,time,posix
 
-src_path="/home/marco/Desktop/TOOL_PREDICTION/SherLoc2/src/"
+src_path="/media/storage/software/subcons/TOOLS/SherLoc2/src/"
 
 sys.path.append(src_path)
 
@@ -70,11 +70,11 @@ def sherloc2_create_feature_vector(origin, fastafile, go_file_names, model, pred
 		use_inter_pro_scan = 0
 	feature_vector = []
 	print "create feature vectors"
-	libsvm_path="/usr/bin/"
+	libsvm_path="/media/storage/env/bin/"
 	inter_pro_scan_path=""
 	blast_path="/usr/bin/"
-	genome_path="/home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI/"
-	svm_data_path="/home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/svm_models/SherLoc2/"
+	genome_path="/media/storage/software/subcons/TOOLS/SherLoc2/data/NCBI/"
+	svm_data_path="/media/storage/software/subcons/TOOLS/SherLoc2/data/svm_models/SherLoc2/"
 	util.validate_not_empty([libsvm_path,blast_path,genome_path,svm_data_path])
 	if use_inter_pro_scan == 1:
 		util.validate_not_empty([inter_pro_scan_path])
@@ -339,8 +339,8 @@ def sherloc2_create_feature_vector(origin, fastafile, go_file_names, model, pred
 def sherloc2_predict_location(origin, feature_vector, model, prediction_id):
 	print "run SherLoc2"
 	result = []
-	libsvm_path="/usr/bin/"
-	svm_data_path="/home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/svm_models/SherLoc2/"
+	libsvm_path="/media/storage/env/bin/"
+	svm_data_path="/media/storage/software/subcons/TOOLS/SherLoc2/data/svm_models/SherLoc2/"
 	if origin == "animal":
 		svm_model_path = svm_data_path+"/benchmark80_animal_sherloc2/"
 		result = svm_sherloc2.animal_predict(feature_vector,svm_model_path,libsvm_path,model, prediction_id)

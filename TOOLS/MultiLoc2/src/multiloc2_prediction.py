@@ -1,7 +1,7 @@
 import string, sys, os, getopt, smtplib, math
 import cgi,re,time,posix
 
-src_path="/home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/src/"
+src_path="/media/storage/software/subcons/TOOLS/MultiLoc2/src/"
 
 sys.path.append(src_path)
 
@@ -70,11 +70,11 @@ def multiloc2_create_feature_vector(predictor,origin, fastafile, go_file_names, 
 		use_inter_pro_scan = 0
 	feature_vector = []
 	print "create feature vectors"
-	libsvm_path="/usr/bin/"
+	libsvm_path="/media/storage/env/bin/"
 	inter_pro_scan_path=""
 	blast_path="/usr/bin/"
-	genome_path="/home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/data/NCBI/"
-	svm_data_path="/home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/data/svm_models/MultiLoc2/"
+	genome_path="/media/storage/software/subcons/TOOLS/MultiLoc2/data/NCBI/"
+	svm_data_path="/media/storage/software/subcons/TOOLS/MultiLoc2/data/svm_models/MultiLoc2/"
 	util.validate_not_empty([libsvm_path,blast_path,genome_path,svm_data_path])
 	if use_inter_pro_scan == 1:
 		util.validate_not_empty([inter_pro_scan_path])
@@ -421,8 +421,8 @@ def multiloc2_create_feature_vector(predictor,origin, fastafile, go_file_names, 
 def multiloc2_predict_location(predictor,origin, feature_vector, model, prediction_id):
 	print "run MultiLoc2"
 	result = []
-	libsvm_path="/usr/bin/"
-	svm_data_path="/home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/data/svm_models/MultiLoc2/"
+	libsvm_path="/media/storage/env/bin/"
+	svm_data_path="/media/storage/software/subcons/TOOLS/MultiLoc2/data/svm_models/MultiLoc2/"
 	if origin == "animal":
 		if predictor == "MultiLoc2.11":
 			svm_model_path = svm_data_path+"/benchmark80_animal_multiloc_with_new_svmaac_join_phylo_G78BS_join_go/"

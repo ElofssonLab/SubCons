@@ -1,7 +1,7 @@
 import re,sys,os,string, time, util
 
 svm_path=""
-tmpfile_path="/home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/tmp/"
+tmpfile_path="/media/storage/software/subcons/TOOLS/MultiLoc2/tmp/"
 
 all_animal_go_terms = []
 all_fungi_go_terms = []

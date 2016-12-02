@@ -1,6 +1,6 @@
 import re, os, sys, string, util
 
-tmpfile_path="/home/marco/Desktop/TOOL_PREDICTION/SherLoc2/tmp/"
+tmpfile_path="/media/storage/software/subcons/TOOLS/SherLoc2/tmp/"
 
 def create_pattern_aac(sequence,klasse):
 	pattern = []

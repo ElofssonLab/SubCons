@@ -1,6 +1,6 @@
 import re, os, sys, util
 
-tmpfile_path="/home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/tmp/"
+tmpfile_path="/media/storage/software/subcons/TOOLS/MultiLoc2/tmp/"
 
 def predict(origin,table,proteins,path,libsvm_path,model=12345, id=1):
 	model=str(model)
