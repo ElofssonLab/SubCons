@@ -233,6 +233,6 @@ fi
 
 echo "REMOVE UNNECESSARY INTERMEDIATE FILES"
 
-rm $OUTDIR/prediction/*.res"
+rm $OUTDIR/prediction/*.res
 
 rm $OUTDIR/dat-files/*.dat
