@@ -1,6 +1,6 @@
 import re, os, sys, util
 
-tmpfile_path="/home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/tmp/"
+tmpfile_path="/media/storage/software/subcons/TOOLS/MultiLoc2/tmp/"
 svm_path=""
 firstN = 100
 window_size = 20

@@ -1,2 +1,2 @@
 iprscan -cli -i $1 -o interpro.out -format raw -goterms -iprlookup
-python /home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/src/multiloc2_prediction.py -fasta=$1 -origin=$2 -result=$3 -go=interpro.out
+python /media/storage/software/subcons/TOOLS/MultiLoc2/src/multiloc2_prediction.py -fasta=$1 -origin=$2 -result=$3 -go=interpro.out

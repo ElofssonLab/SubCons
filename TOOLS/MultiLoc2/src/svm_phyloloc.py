@@ -1,8 +1,8 @@
 import re,sys,os,string,math,time,util
 
 svm_path=""
-tmpfile_path="/home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/tmp/"
-genome_path="/home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/data/NCBI/"
+tmpfile_path="/media/storage/software/subcons/TOOLS/MultiLoc2/tmp/"
+genome_path="/media/storage/software/subcons/TOOLS/MultiLoc2/data/NCBI/"
 blast_path="/usr/bin/" 
 formatdb_path="/usr/bin/" 
 

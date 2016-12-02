@@ -7,7 +7,7 @@ from collections import Counter
 if not len(sys.argv) == 2:
   print "Usage:",sys.argv[0],"results_folder"
   sys.exit(-1)
-  
+
 dic_loc = {'nuclear':'NUC','plasma membrane':'MEM','extracellular':'EXE','cytoplasmic':'CYT','mitochondrial':'MIT','ER':'ERE','peroxisomal':'VES','lysosomal':'VES','Golgi apparatus':'GLG'}
 dic_sherloc2_loc = {'VES':'VES','cytoplasmic':'CYT','ER':'ERE','Golgi apparatus':'GLG','lysosomal':'VES','mitochondrial':'MIT','nuclear':'NUC','peroxisomal':'VES','plasma membrane':'MEM','extracellular':'EXC'}
 dic_loctree2_loc = {'chloroplast':'MIT','chloroplast membrane':'MIT','cytosol':'CYT','endoplasmic reticulum':'ERE','endoplasmic reticulum membrane':'ERE','golgi apparatus':'GLG','golgi apparatus membrane':'GLG','mitochondria':'MIT','mitochondria membrane':'MIT','nucleus':'NUC','nucleus membrane':'NUC','peroxisome':'VES','peroxisome membrane':'VES','plasma membrane':'MEM','plastid':'MIT','vacuole':'MIT','vacuole membrane':'MIT','secreted':'EXC'}
@@ -27,52 +27,46 @@ def parse_cello(cello,filename):
 				id_sp1 =  line[0].split(':')[1].split(' ')[1]
 			elif len(line)>=7 :#and 'Combined SVM classifier:' in line[1]:
 				if id_sp1 == id_sp1 and len(line) == 7:
-		
 					if line[-2] in dic_cello_loc.keys():
 						score = line[-1].split(' ')[0]
 						loc = line[-2].replace(line[-2],dic_cello_loc[line[-2]])
 						if not id_sp1 in dic_pred:
 							dic_pred[id_sp1]={}
-						
 							if not loc in dic_pred[id_sp1]:
 								dic_pred[id_sp1][loc]=[]
 								dic_pred[id_sp1][loc].append(float(score))
 							if loc in dic_pred[id_sp1]:
 								dic_pred[id_sp1][loc].append(float(score))
-	
+
 						if id_sp1 in dic_pred:
 							loc = line[-2].replace(line[-2],dic_cello_loc[line[-2]])
-						
 							if not loc in dic_pred[id_sp1]:
 								dic_pred[id_sp1][loc]=[]
 								dic_pred[id_sp1][loc].append(float(score))
 							#dic_pred[id_sp1][loc]=round(float(line[-1].split(' ')[0])/7,2)
 							if loc in dic_pred[id_sp1]:
 								dic_pred[id_sp1][loc].append(float((score)))
-								
+
 				if id_sp1 != id_sp1 and len(line) == 7:
 					if line[-2]  in dic_cello_loc.keys():
 						score = line[-1].split(' ')[0]
 						loc = line[-2].replace(line[-2],dic_cello_loc[line[-2]])
 						if not id_sp1 in dic_pred:
 							dic_pred[id_sp1]={}
-							
-							if not loc in dic_pred[id_sp1]:	
-								dic_pred[id_sp1][loc]=[]			
+
+							if not loc in dic_pred[id_sp1]:
+								dic_pred[id_sp1][loc]=[]
 								dic_pred[id_sp1][loc].append(float(score))
 							if loc in dic_pred:
 								dic_pred[id_sp1][loc].append(float(score))
-	
 						if id_sp1 in dic_pred:
 							loc = line[-2].replace(line[-2],dic_cello_loc[line[-2]])
-						
 							if not loc in dic_pred[id_sp1]:
 								dic_pred[id_sp1][loc]=[]
 								dic_pred[id_sp1][loc].append(float(score))
 							#dic_pred[id_sp1][loc]=round(float(score)
 							if loc in dic_pred[id_sp1]:
 								dic_pred[id_sp1][loc].append(float(score))
-	
 				if line[-4] == '':
 					if id_sp1 == id_sp1 and len(line) == 8:
 						if line[-3]  in dic_cello_loc.keys():
@@ -80,14 +74,12 @@ def parse_cello(cello,filename):
 							score = line[-1].split(' ')[0]
 							if not id_sp1 in dic_pred:
 								dic_pred[id_sp1]={}
-							
 								if not loc in dic_pred[id_sp1]:
 									dic_pred[id_sp1][loc]=[]
 									dic_pred[id_sp1][loc].append(float(score))
 								if loc in dic_pred[id_sp1]:
 									dic_pred[id_sp1][loc].append(float(score))
 							if id_sp1 in dic_pred:
-							
 								if not loc in dic_pred[id_sp1]:
 									dic_pred[id_sp1][loc]=[]
 									dic_pred[id_sp1][loc].append(float(score))
@@ -99,20 +91,17 @@ def parse_cello(cello,filename):
 							score = line[-1].split(' ')[0]
 							if not id_sp1 in dic_pred:
 								dic_pred[id_sp1]={}
-							
 								if not loc in dic_pred[id_sp1]:
-									dic_pred[id_sp1][loc]=[]							
+									dic_pred[id_sp1][loc]=[]
 									dic_pred[id_sp1][loc].append(float(score))
 								if loc in dic_pred[id_sp1]:
 									dic_pred[id_sp1][loc].append(float(score))
 							if id_sp1 in dic_pred:
-							
-								if not loc in dic_pred[id_sp1]:	
-									dic_pred[id_sp1][loc]=[]						
+								if not loc in dic_pred[id_sp1]:
+									dic_pred[id_sp1][loc]=[]
 									dic_pred[id_sp1][loc].append(float(score))
 								if loc in dic_pred[id_sp1]:
 									dic_pred[id_sp1][loc].append(float(score))
-	
 		for k,v in dic_pred.iteritems():
 			k =  k.strip('\n')
 			for loc1,s in v.iteritems():
@@ -123,7 +112,7 @@ def parse_cello(cello,filename):
 				if k in dic_cello:
 					dic_cello[k][loc1]=score
 		cello_df = pd.DataFrame(dic_cello).T
-		#print cello_df
+		print cello_df
 		cello_df.to_csv(sys.argv[1]+'/for-dat/'+str(filename)+'.cello.csv', sep='\t', encoding='utf-8')
 	except:
 		pass
@@ -258,7 +247,7 @@ def parse_yloc(yloc,filename):
 	
 path_results = sys.argv[1]+'/prediction/'
 paths_results = glob.glob(path_results+'*.*.res')
-
+print paths_results
 
 for el in paths_results:
 	name_file = el.split('/')[2].split('.')[0]
@@ -276,6 +265,7 @@ for el in paths_results:
 		parse_multiloc2(file_pred,name_file)
 		
 	if predictor_used.endswith(".c.res"):
+		print True
 		file_pred = open(sys.argv[1]+'/prediction/'+str(predictor_used))
 		parse_cello(file_pred,name_file)
 	

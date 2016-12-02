@@ -1,7 +1,7 @@
 import re, os, sys, time, util
 
 svm_path=""
-tmpfile_path="/home/marco/Desktop/TOOL_PREDICTION/MultiLoc2/tmp/"
+tmpfile_path="/media/storage/software/subcons/TOOLS/MultiLoc2/tmp/"
 
 firstN_plant = 100
 firstN_noplant = 60
