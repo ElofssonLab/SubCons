@@ -1,6 +1,0 @@
-# BLASTP 2.2.26 [Sep-21-2011]
-# Query: sp|A0AVK6|E2F8_HUMAN
-# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Bacteria/all/374463.faa
-# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
-sp|A0AVK6|E2F8_HUMAN	gi|94676849|ref|YP_588544.1|	24.00	125	83	4	383	496	248	371	0.14	29.6
-sp|A0AVK6|E2F8_HUMAN	gi|94676778|ref|YP_588886.1|	30.00	50	34	1	131	179	31	80	0.18	28.9

@@ -1,6 +1,0 @@
-# BLASTP 2.2.26 [Sep-21-2011]
-# Query: sp|A0AEI5|BR2GB_RANGU
-# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Bacteria/all/103690.faa
-# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
-sp|A0AEI5|BR2GB_RANGU	gi|17230146|ref|NP_486694.1|	48.28	29	13	1	27	53	1251	1279	3.0	23.5
-sp|A0AEI5|BR2GB_RANGU	gi|17232333|ref|NP_488881.1|	40.91	22	13	0	39	60	97	118	8.2	21.9

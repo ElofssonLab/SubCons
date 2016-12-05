@@ -1,7 +1,0 @@
-# BLASTP 2.2.26 [Sep-21-2011]
-# Query: sp|P04899|GNAI2_HUMAN
-# Database: /home/marco/Desktop/TOOL_PREDICTION/SherLoc2/data/NCBI//genomes/Bacteria/all/64471.faa
-# Fields: Query id, Subject id, % identity, alignment length, mismatches, gap openings, q. start, q. end, s. start, s. end, e-value, bit score
-sp|P04899|GNAI2_HUMAN	gi|113953886|ref|YP_731517.1|	28.07	57	40	1	75	131	241	296	2.7	25.8
-sp|P04899|GNAI2_HUMAN	gi|113954694|ref|YP_731777.1|	27.50	40	29	0	37	76	83	122	6.3	24.6
-sp|P04899|GNAI2_HUMAN	gi|113953108|ref|YP_729739.1|	26.98	63	40	2	38	95	334	395	7.3	24.6

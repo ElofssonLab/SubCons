@@ -1,60 +1,75 @@
 #!/bin/bash
 
-usage="
-USAGE: $0 SEQFILE OUTDIR TMPDIR
-"
-
-VERBOSE=1
-
-domain=euka
-
-rundir=`dirname $0`
-rundir=$(readlink -f $rundir)
-echo $rundir
-#cd $rundir
-
-if [ $# -lt 3 ];then
-	echo "$usage"
-	exit 1
-fi
-
-SEQFILE=$1
-OUTDIR=$2
-TMPDIR=$3
-
-SEQFILE=$(readlink -f $SEQFILE)
-OUTDIR=$(readlink -f $OUTDIR)
-TMPDIR=$(readlink -f $TMPDIR)
-
-
-RUNTOOL=$rundir/TOOLS
-PRODRES_PATH=/media/storage/software/PRODRES
-
-exec_cmd(){
+exec_cmd(){ #{{{
     case $VERBOSE in
         yes|1)
         echo -e "\n$*\n"
     esac
     eval "$*"
 }
+#}}}
 
-#GetPSSMFile{
-#	/bin/cp $OUTDIR/*.pssm
+usage="
+USAGE: $0 SEQFILE OUTDIR
 
-	# or to be retrieved by the API script from the PSSM web-server
-	# TO be done
-#}
+OPTIONS:
+  SEQFILE  A file containing a single amino acid sequence in FASTA format
+  OUTDIR   Path where the result will be output
+"
 
-#exec_cmd{
-#	echo "$*"
-#	eval "$*"
-#}
+VERBOSE=1
+
+domain=euka
+
+#yloc is not run in this versino of subcons, might be implemented in the future versions
+is_run_yloc=0
+
+rundir=`dirname $0`
+rundir=$(readlink -f $rundir)
+echo $rundir
+#cd $rundir
+
+if [ $# -lt 2 ];then
+	echo "$usage"
+	exit 1
+fi
+
+SEQFILE=$1
+OUTDIR=$2
+
+SEQFILE=$(readlink -f $SEQFILE)
+OUTDIR=$(readlink -f $OUTDIR)
+
+
+TMPDIR=$OUTDIR/tmp/
+TMP_MULTILOC=$OUTDIR/tmp/tmp_MULTILOC/
+TMP_SHERLOC=$OUTDIR/tmp/tmp_SHERLOC/
+
+export TMP_MULTILOC
+export TMP_SHERLOC
+
+RUNTOOL=$rundir/TOOLS
+
+PRODRES_PATH=$rundir/apps/PRODRES
+PfamScan_PATH=$rundir/apps/PfamScan
+
+export PERL5LIB=$PERL5LIB:$PfamScan_PATH
+
+PRODRES_PATH=$(readlink -f $PRODRES_PATH)
+
+exec_PRODRES=$PRODRES_PATH/PRODRES/PRODRES.py
+
+if [  ! -e $exec_PRODRES ];then
+	echo "PRODRES script '$exec_PRODRES' does not exist. Aborting." >&2
+	exit 1
+fi
+
+
 
 
 basename_seqfile=$(basename $SEQFILE)
 rootname_seqfile=${basename_seqfile%.*}
 
-pssmfile=$rootname_seqfile
 
 
 #CREATE FOLDER:
@@ -80,12 +95,20 @@ fi
 if [ ! -d "$TMPDIR" ]; then
 	mkdir -p $TMPDIR
 fi
+if [ ! -d "$TMP_SHERLOC" ]; then
+	mkdir -p $TMP_SHERLOC
+fi
+if [ ! -d "$TMP_MULTILOC" ]; then
+	mkdir -p $TMP_MULTILOC
+fi
 
 
 echo "CREATE PSSM File"
-exec_cmd "python $PRODRES_PATH/PRODRES/PRODRES.py --input $SEQFILE --output $PRODRES_PATH/PRODRES --pfam-dir $PRODRES_PATH/databases/ --pfamscan-script /usr/bin/pfam_scan.pl --pfamscan_bitscore 2 --uniprot-db-fasta $PRODRES_PATH/databases/uniref90.fasta --second-search psiblast --psiblast_e-val 0.001 --psiblast_iter 3"
+outpath_PRODRES=$TMPDIR/rst_prodres
+mkdir -p $outpath_PRODRES
+exec_cmd "python $exec_PRODRES --input $SEQFILE --output $outpath_PRODRES --pfam-dir $PRODRES_PATH/databases/ --pfamscan-script $PfamScan_PATH/pfam_scan.pl --pfamscan_bitscore 2 --uniprot-db-fasta $PRODRES_PATH/databases/blastdb/uniref90.fasta --second-search psiblast --psiblast_e-val 0.001 --psiblast_iter 3"
 
-resfile_pssm=$PRODRES_PATH/PRODRES/$pssmfile/outputs/psiPSSM.txt
+resfile_pssm=$outpath_PRODRES/$rootname_seqfile/outputs/psiPSSM.txt
 
 success1=0
 if [ -s $resfile_pssm ];then
@@ -100,7 +123,7 @@ resfile_loctree2=$OUTDIR/prediction/${rootname_seqfile}.lc2.res
 
 echo "RUNNING LOCTREE2"
 #exec_cmd "loctree2 --fasta $SEQFILE --blastmat $OUTDIR --resfile $resfile_loctree2 --domain $domain"
-exec_cmd "loctree2 --fasta $SEQFILE --blastmat $PRODRES_PATH/PRODRES/$pssmfile/outputs/psiPSSM.txt --resfile $resfile_loctree2 --domain $domain"
+exec_cmd "loctree2 --fasta $SEQFILE --blastmat $outpath_PRODRES/$rootname_seqfile/outputs/psiPSSM.txt --resfile $resfile_loctree2 --domain $domain"
 
 success2=0
 if [ -s $resfile_loctree2 ];then
@@ -143,21 +166,22 @@ else
 fi
 
 
-resfile_yloc=$OUTDIR/prediction/${rootname_seqfile}.y.res
+if [ $is_run_yloc -eq 1 ];then
+    resfile_yloc=$OUTDIR/prediction/${rootname_seqfile}.y.res
 
-if [ $success4 -eq 1 ];then
-	echo "RUNNING YLOC"
-	#exec_cmd "python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc"
+    if [ $success4 -eq 1 ];then
+        echo "RUNNING YLOC"
+        #exec_cmd "python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc"
 
-fi
+    fi
 
-
-success4=0
-if [ -s $resfile_yloc ];then
-	success4=1
-else
-	echo "Failed to run yloc, resfile_yloc $resfile_yloc does not exist or empty" >&2
-	exec_cmd "mv $resfile_yloc $TMPDIR/"
+    success4=0
+    if [ -s $resfile_yloc ];then
+        success4=1
+    else
+        echo "Failed to run yloc, resfile_yloc $resfile_yloc does not exist or empty" >&2
+        exec_cmd "mv $resfile_yloc $TMPDIR/"
+    fi
 fi
 
 resfile_cello=$OUTDIR/prediction/${rootname_seqfile}.c.res
@@ -179,11 +203,9 @@ fi
 
 
 
-exec_cmd "mv $PRODRES_PATH/PRODRES/$pssmfile/outputs/psiPSSM.txt $PRODRES_PATH/PRODRES/$pssmfile/outputs/$pssmfile.pssm"
-exec_cmd "mv $PRODRES_PATH/PRODRES/$pssmfile/outputs/$pssmfile.pssm $OUTDIR/"
+exec_cmd "mv $outpath_PRODRES/${rootname_seqfile}/outputs/psiPSSM.txt $OUTDIR/${rootname_seqfile}.pssm"
 
-
-sleep 1
+exec_cmd "sleep 1s"
 
 
 

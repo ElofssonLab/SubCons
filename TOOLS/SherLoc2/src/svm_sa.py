@@ -1,6 +1,6 @@
 import re, os, sys, util
 
-tmpfile_path="/media/storage/software/subcons/TOOLS/SherLoc2/tmp/"
+tmpfile_path=os.environ['TMP_SHERLOC']
 svm_path=""
 firstN = 100
 window_size = 20

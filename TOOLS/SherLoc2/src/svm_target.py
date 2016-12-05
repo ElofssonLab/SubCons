@@ -1,7 +1,7 @@
 import re, os, sys, time, util
 
 svm_path=""
-tmpfile_path="/media/storage/software/subcons/TOOLS/SherLoc2/tmp/"
+tmpfile_path=os.environ['TMP_SHERLOC']
 
 firstN_plant = 100
 firstN_noplant = 60

@@ -1,10 +1,17 @@
 import re,sys,os,string,math,time,util
 
+def run_shell_command(cmd):
+        stdout_handle = os.popen(cmd, "r")
+        ss =  re.sub("\n","",stdout_handle.read()) 
+        return ss.strip().rstrip("/")
+
+rundir=os.path.dirname(os.path.realpath(__file__))
+basedir=os.path.realpath("%s/../"%(rundir))
 svm_path=""
-tmpfile_path="/media/storage/software/subcons/TOOLS/MultiLoc2/tmp/"
-genome_path="/media/storage/software/subcons/TOOLS/MultiLoc2/data/NCBI/"
-blast_path="/usr/bin/" 
-formatdb_path="/usr/bin/" 
+tmpfile_path=os.environ['TMP_MULTILOC']
+genome_path="%s/data/NCBI/"%(basedir)
+blast_path=os.path.dirname(run_shell_command("which blastall"))+"/"
+formatdb_path=blast_path
 
 protein_self_bit_score_map = {}
 
