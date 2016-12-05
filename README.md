@@ -64,6 +64,10 @@ INSTALL PRODRES
 	ln -s PATH-TO-PRODRES PATH-TO-SUBCONS/apps/PRODRES
 	```
 
+    The database of PRODRES should be installed in the folder
+    `PATH-TO-PRODRES/databases`. The blastdb uniprot90.fasta should be
+    installed at `PATH-TO-PRODRES/databases/blastdb`.
+
 INSTALL MUltiLoc2: 
 
 	python TOOLS/MultiLoc2/configureML2.py

@@ -51,6 +51,9 @@ export TMP_SHERLOC
 RUNTOOL=$rundir/TOOLS
 
 PRODRES_PATH=$rundir/apps/PRODRES
+PfamScan_PATH=$rundir/apps/PfamScan
+
+export PERL5LIB=$PERL5LIB:$PfamScan_PATH
 
 PRODRES_PATH=$(readlink -f $PRODRES_PATH)
 
@@ -103,7 +106,7 @@ fi
 echo "CREATE PSSM File"
 outpath_PRODRES=$TMPDIR/rst_prodres
 mkdir -p $outpath_PRODRES
-exec_cmd "python $exec_PRODRES --input $SEQFILE --output $outpath_PRODRES --pfam-dir $PRODRES_PATH/databases/ --pfamscan-script /usr/bin/pfam_scan.pl --pfamscan_bitscore 2 --uniprot-db-fasta $PRODRES_PATH/databases/uniref90.fasta --second-search psiblast --psiblast_e-val 0.001 --psiblast_iter 3"
+exec_cmd "python $exec_PRODRES --input $SEQFILE --output $outpath_PRODRES --pfam-dir $PRODRES_PATH/databases/ --pfamscan-script $PfamScan_PATH/pfam_scan.pl --pfamscan_bitscore 2 --uniprot-db-fasta $PRODRES_PATH/databases/blastdb/uniref90.fasta --second-search psiblast --psiblast_e-val 0.001 --psiblast_iter 3"
 
 resfile_pssm=$outpath_PRODRES/$rootname_seqfile/outputs/psiPSSM.txt
 
