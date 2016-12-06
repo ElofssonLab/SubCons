@@ -50,7 +50,7 @@ Install dependencies if not installed:
 	pp-popularity-contest
 	
 
-INSTALL libsvm FOR SherLoc2 & MultiLoc2
+INSTALL libsvm 
 
 	git clone https://github.com/cjlin1/libsvm.git # then open cd libsvm/ and type : make all
 
@@ -73,7 +73,7 @@ INSTALL PRODRES
     `PATH-TO-PRODRES/databases`. The blastdb uniprot90.fasta should be
     installed at `PATH-TO-PRODRES/databases/blastdb`.
 
-INSTALL MUltiLoc2: 
+INSTALL MultiLoc2: 
 
 	python TOOLS/MultiLoc2/configureML2.py
 
@@ -87,9 +87,9 @@ INSTALL YLoc: (it is not working at the moment, we do not garantee its usage!)
 
 NO INSTALLATION NEEDED FOR CELLO2.5 since runs through the script in /TOOLS/cello.py
 
-WE PROVIDE MultiLoc2, SherLoc2, YLoc, CELLO2.5 insted for LocTree2 follow the instruction (if something goes wrong refer to https://rostlab.org/owiki/index.php/Packages)
+We provide MultiLoc2, SherLoc2, YLoc, CELLO2.5 insted for LocTree2 follow the instruction (if something goes wrong refer to https://rostlab.org/owiki/index.php/Packages)
 
-INSTALL LocTree2 TYPE FROM THE COMMAND LINE THE FOLLOWING (https://rostlab.org/owiki/index.php/Debian_repository):
+INSTALL LocTree2 (https://rostlab.org/owiki/index.php/Debian_repository):
 
 	sudo apt-get install python-software-properties
 	sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
@@ -98,16 +98,19 @@ INSTALL LocTree2 TYPE FROM THE COMMAND LINE THE FOLLOWING (https://rostlab.org/o
 	sudo apt-get update
 	sudo apt-get install loctree2
 
-YOU ALSO NEED loctree2-data so download using:
+INSTALL loctree2-data:
 
 	1-) wget ftp://rostlab.org/free/loctree2-data-1.0.2.tar.gz
 
 	2-) it is recomended to untar the folder in the same path of LocTree2
 
-NOTE: IF YOU GOT AN ERROR LIKE THIS WHEN INSTALLING LocTree2: Cannot set LC_CTYPE to default locale: No such file or directory
+NOTE: IF YOU GOT AN ERROR LIKE THIS WHEN INSTALLING 
+
+	"LocTree2: Cannot set LC_CTYPE to default locale: No such file or directory"
+
 You maybe need to type in the terminal this command:
 	
-	A-) export LC_ALL="en_US.UTF-8"
+	1-) export LC_ALL="en_US.UTF-8"
 
 NOTE:
    
@@ -117,7 +120,7 @@ NOTE:
 
 To run SubCons after the installation type:
 	
-	$ bash master_subcons.sh SEQFILE/test.fasta OUTDIR/ JUNK
+	$ bash master_subcons.sh SEQFILE/test.fasta OUTDIR
 	
 
 NOTE:
