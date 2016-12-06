@@ -26,17 +26,18 @@ Installation and usage:
 
 Check out the software from the github by:
 
-git clone https://bitbucket.org/salvatore_marco/subcons-web-server \n
+	git clone https://bitbucket.org/salvatore_marco/subcons-web-server
 
 
 
-Install dependencies if not installed: \n
-	numpy\n
-	scipy\n
-	scikit-learn 0.17.1 (https://pypi.python.org/pypi/scikit-learn/0.17.1)\n
-	python-ZSI\n
-	python-mechanize\n
-	pandas\n
+Install dependencies if not installed:
+	
+	numpy
+	scipy
+	scikit-learn 0.17.1 (https://pypi.python.org/pypi/scikit-learn/0.17.1)
+	python-ZSI
+	python-mechanize
+	pandas
 	matplotlib
 	itertools
 	time
@@ -78,9 +79,9 @@ INSTALL MUltiLoc2:
 
 INSTALL SherLoc2:
 
-	python TOOLS/MultiLoc2/ configureSL2.py
+	python TOOLS/MultiLoc2/configureSL2.py
 
-INSTALL YLoc: (NOT WORKING)
+INSTALL YLoc: (it is not working at the moment, we do not garantee its usage!)
 	
 	Use "wsdl2py" to create YLocSOAP_services.py and YLocSOAP_services_types.py
 
@@ -88,7 +89,7 @@ NO INSTALLATION NEEDED FOR CELLO2.5 since runs through the script in /TOOLS/cell
 
 WE PROVIDE MultiLoc2, SherLoc2, YLoc, CELLO2.5 insted for LocTree2 follow the instruction (if something goes wrong refer to https://rostlab.org/owiki/index.php/Packages)
 
-INSTALL LocTree2 TYPE FROM THE COMMAND LINE THE FOLLOWING:
+INSTALL LocTree2 TYPE FROM THE COMMAND LINE THE FOLLOWING (https://rostlab.org/owiki/index.php/Debian_repository):
 
 	sudo apt-get install python-software-properties
 	sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
