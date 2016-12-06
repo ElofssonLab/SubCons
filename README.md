@@ -1,53 +1,57 @@
 SubCons
 
-This is the standalone version of web-server http://subcons.bioinfo.se. This software package is supposed to be run on Ubuntu x64 system. It might also work on other Linux boxes but have not been tested.
+This is the standalone version of web-server http://subcons.bioinfo.se.
+This software package is supposed to be run on Ubuntu x64 system. 
+It might also work on other Linux boxes but have not been tested.
 
 If you are interested in running SubCons on other systems, please contact Arne Elofsson (arne@bioinfo.se)
 
+Description of the method:
 SubCon is a new ensemble method for improved subcellular localization prediction in Human.
-
+SubCons combines up to five predictors methods, SherLoc2, LocTree2, MultiLoc2, 
+CELLO2.5 and YLoc (the latest two if available) using a random forest classifier.
+LocTree2 requires PSSM. To speed up the creation of PSSM file,
+we used our tool PRODRES (more info at https://github.com/ElofssonLab/PRODRES).
+PRODRES creates PSSM profile very fast and with the same accuracy of Psi-Blast.
+It is recomended to read carefully the instruction and install it!
+However, SubCons runs Psi-Blast as alternative to PRODRES (THIS MAKE SUBCONS MUCH SLOWER)
+ 
 The software is open source and licensed under the GPL license.
 
 Reference
 
 Salvatore, M., Warholm, P., Shu, N., Basile, W., Elofsson, A., 2015. SubCons: a new ensemble method for improved subcellular localization predictions.
 
-NOTE: SubCons runs PRODRES our new programm that generatares PSSM profile very fast and with the same accuracy of Psi-Blast
-      We suggest to read carefully the instruction and install it!
-      However, SubCons runs Psi-Blast as alternative to PRODRES (THIS MAKE SUBCONS MUCH SLOWER)
-
-Description
-
 Installation and usage:
 
-Check out the software from the github by
+Check out the software from the github by:
 
-  $ git clone https://bitbucket.org/salvatore_marco/subcons-web-server (I THINK WE SHOULD MOVE FROM HERE)
+git clone https://bitbucket.org/salvatore_marco/subcons-web-server \n
 
 
-Install dependencies if not installed
-	numpy
-	scipy
-	sklearn
-	python-ZSI
-	python-mechanize
-	pandas
+
+Install dependencies if not installed: \n
+	numpy\n
+	scipy\n
+	scikit-learn 0.17.1 (https://pypi.python.org/pypi/scikit-learn/0.17.1)\n
+	python-ZSI\n
+	python-mechanize\n
+	pandas\n
 	matplotlib
 	itertools
 	time
 	collections
 	pickle
-	R library ggplot2
-	R library reshape
+	R library ggplot2 (recomended latest R version)
+	R library reshape (recomended latest R version)
 	ncbi-blast+ or blast2
 	libsvm 
 	pp-popularity-contest
+	
 
 INSTALL libsvm FOR SherLoc2 & MultiLoc2
 
 	git clone https://github.com/cjlin1/libsvm.git # then open cd libsvm/ and type : make all
-	
- 	NOTE: after download and install svm-predict & co must be moved in /usr/bin on your local machine
 
 INSTALL BLAST PACKAGE 
 
@@ -86,8 +90,8 @@ WE PROVIDE MultiLoc2, SherLoc2, YLoc, CELLO2.5 insted for LocTree2 follow the in
 
 INSTALL LocTree2 TYPE FROM THE COMMAND LINE THE FOLLOWING:
 
- 	sudo apt-get install python-software-properties
- 	sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
+	sudo apt-get install python-software-properties
+	sudo apt-add-repository "deb http://rostlab.org/debian/ stable main contrib non-free"
 	sudo apt-get update (ignore GPG error)
 	sudo apt-get install rostlab-debian-keyring (without verification)
 	sudo apt-get update
@@ -97,7 +101,7 @@ YOU ALSO NEED loctree2-data so download using:
 
 	1-) wget ftp://rostlab.org/free/loctree2-data-1.0.2.tar.gz
 
-	2-) untar this file in /usr/share using "sudo tar -C /usr/share/ -zxvf loctree2-data-1.0.2.tar.gz"
+	2-) it is recomended to untar the folder in the same path of LocTree2
 
 NOTE: IF YOU GOT AN ERROR LIKE THIS WHEN INSTALLING LocTree2: Cannot set LC_CTYPE to default locale: No such file or directory
 You maybe need to type in the terminal this command:
@@ -106,10 +110,9 @@ You maybe need to type in the terminal this command:
 
 NOTE:
    
-	1-) make sure you have libsvm, blast, loctree2-data and loctree2 in the folder /usr/share in your local machine 
- 	2-) keep the tools in the folder /SubCons-web-server/TOOL
- 	3-) the folder "src" is the folder containing the SubCons scripts.
- 	4-) run_subcons.sh is a script that create necessary folder and run each predictor (IT IS INCLUDED IN THE FINAL SCRIPT batch_subcons.sh)
+	1-) it is recomended to have libsvm, blast, loctree2-data and loctree2 in the same path
+	2-) keep the tools in the folder /SubCons-web-server/TOOLS
+	3-) the folder "src" is the folder containing the SubCons scripts.
 
 To run SubCons after the installation type:
 	
