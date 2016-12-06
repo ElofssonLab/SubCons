@@ -50,6 +50,9 @@ Install dependencies if not installed:
 	libsvm 
 	pp-popularity-contest
 	
+NOTE:
+	It is strongly recomended to have this version of sklearn "scikit-learn 0.17.1 (https://pypi.python.org/pypi/scikit-learn/0.17.1)".
+	We experienced some problem with the latest version of sklearn in using the package pickle.
 
 INSTALL libsvm 
 
