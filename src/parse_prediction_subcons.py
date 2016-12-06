@@ -119,7 +119,7 @@ def parse_cello(cello,filename):
 def parse_loctree2(loctree2,filename):
 	dic_loctree2 = {}
 	for line in loctree2:
-		if line.startswith('sp'):
+		if not line.startswith('#'):
 			sp_id1 = line.split('\t')[0].strip('\n')
 			loc = line.split('\t')[1].strip('\n')
 			score = line.split('\t')[2].strip('\n')
@@ -161,20 +161,24 @@ def parse_loctree2(loctree2,filename):
 def parse_multiloc2(multiloc2,filename):
 	dic_multiloc2 = {}
 	for line in multiloc2:
-		if line.startswith('sp'):
-			line = line.replace(':',',').replace('\t',',').replace(', ',',').strip('\n')
-			ids = line.split(',')[0].strip('\n')
-			#loc = line.split(',')[1].split(':')[0]
-			d = dict(itertools.izip_longest(*[iter(line.split(',')[1:])] * 2, fillvalue=""))
-			x = list(''.join(value) for key, value in d.items() if 'lysosomal' in key or "peroxisomal" in key)
-			d.pop('lysosomal')
-			d.pop('peroxisomal')
-			a = float(x[0])
-			b = float(x[1])
-			x1 = round(float(a+b),3)
-			d['VES']=x1
-			d3 = {v2:v for k2,v2 in dic_multiloc2_loc.iteritems() for k,v in d.iteritems() if k==k2}
-			dic_multiloc2[ids]=d3
+		line = line.replace('MultiLoc2 Prediction Result','')
+		line = line.rstrip('\n\n')
+		if line != '':
+			if not line.startswith('predictor'):
+				if not line.startswith('origin'):
+					line = line.rstrip()
+					line = line.replace(':',',').replace('\t',',').replace(', ',',').strip('\n')
+					ids = line.split(',')[0].strip('\n')
+					d = dict(itertools.izip_longest(*[iter(line.split(',')[1:])] * 2, fillvalue=""))			
+					x = list(''.join(value) for key, value in d.items() if 'lysosomal' in key or "peroxisomal" in key)
+					d.pop('lysosomal')
+					d.pop('peroxisomal')
+					a = float(x[0])
+					b = float(x[1])
+					x1 = round(float(a+b),3)
+					d['VES']=x1
+					d3 = {v2:v for k2,v2 in dic_multiloc2_loc.iteritems() for k,v in d.iteritems() if k==k2}
+					dic_multiloc2[ids]=d3
 	
 	multiloc2_df = pd.DataFrame(dic_multiloc2).T
 	multiloc2_df.to_csv(sys.argv[1]+'for-dat/'+str(filename)+'.multiloc2.csv', sep='\t', encoding='utf-8')
@@ -182,20 +186,23 @@ def parse_multiloc2(multiloc2,filename):
 def parse_sherloc2(sherloc2,filename):
 	dic_sherloc2 = {}
 	for line in sherloc2:
-		if line.startswith('sp'):
-			line = line.replace(':',',').replace('\t',',').replace(', ',',').strip('\n')
-			ids = line.split(',')[0].strip('\n')
-			#loc = line.split(',')[1].split(':')[0]
-			d4 = dict(itertools.izip_longest(*[iter(line.split(',')[1:])] * 2, fillvalue=""))
-			x = list(''.join(value) for key, value in d4.items() if 'lysosomal' in key or "peroxisomal" in key)
-			d4.pop('lysosomal')
-			d4.pop('peroxisomal')
-			a = float(x[0])
-			b = float(x[1])
-			x1 = round(float(a+b),3)
-			d4['VES']=x1
-			d5 = {v2:v for k2,v2 in dic_sherloc2_loc.iteritems() for k,v in d4.iteritems() if k==k2}
-			dic_sherloc2[ids]=d5
+		line = line.replace('SherLoc2 Prediction Result','')
+		line = line.rstrip('\n\n')
+		if line != '':
+			if not line.startswith('origin'):
+				line = line.rstrip()
+				line = line.replace(':',',').replace('\t',',').replace(', ',',').strip('\n')
+				ids = line.split(',')[0].strip('\n')
+				d4 = dict(itertools.izip_longest(*[iter(line.split(',')[1:])] * 2, fillvalue=""))
+				x = list(''.join(value) for key, value in d4.items() if 'lysosomal' in key or "peroxisomal" in key)
+				d4.pop('lysosomal')
+				d4.pop('peroxisomal')
+				a = float(x[0])
+				b = float(x[1])
+				x1 = round(float(a+b),3)
+				d4['VES']=x1
+				d5 = {v2:v for k2,v2 in dic_sherloc2_loc.iteritems() for k,v in d4.iteritems() if k==k2}
+				dic_sherloc2[ids]=d5
 	
 	sherloc2_df = pd.DataFrame(dic_sherloc2).T
 	sherloc2_df.to_csv(sys.argv[1]+'for-dat/'+str(filename)+'.sherloc2.csv', sep='\t', encoding='utf-8')
@@ -272,17 +279,3 @@ for el in paths_results:
 		parse_yloc(file_pred,name_file)
 		
 
-
-
-
-	
-
-
-
-
-	
-	
-	
-	
-	
-	
