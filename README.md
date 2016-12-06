@@ -12,8 +12,8 @@ SubCon is a new ensemble method for improved subcellular localization prediction
 SubCons combines up to five predictors methods, SherLoc2, LocTree2, MultiLoc2, 
 CELLO2.5 and YLoc (the latest two if available) using a random forest classifier.
 LocTree2 requires PSSM. To speed up the creation of PSSM file,
-we used our tool PRODRES (more info at https://github.com/ElofssonLab/PRODRES).
-PRODRES creates PSSM profile very fast and with the same accuracy of Psi-Blast.
+we use our tool PRODRES (more info at https://github.com/ElofssonLab/PRODRES).
+PRODRES is faster in createing PSSM profile and it has the same accuracy as Psi-Blast.
 It is recomended to read carefully the instruction and install it!
 However, SubCons runs Psi-Blast as alternative to PRODRES (THIS MAKE SUBCONS MUCH SLOWER)
  
