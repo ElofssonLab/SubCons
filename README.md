@@ -7,20 +7,21 @@ It might also work on other Linux boxes but have not been tested.
 If you are interested in running SubCons on other systems, please contact Arne Elofsson (arne@bioinfo.se)
 
 Description of the method:
-	SubCon is a new ensemble method for improved subcellular localization prediction in Human.
-	SubCons combines up to five predictors methods, SherLoc2, LocTree2, MultiLoc2, 
-	CELLO2.5 and YLoc (the latest two if available) using a random forest classifier.
-	LocTree2 requires PSSM. To speed up the creation of PSSM file,
-	we used our tool PRODRES (more info at https://github.com/ElofssonLab/PRODRES).
-	PRODRES creates PSSM profile very fast and with the same accuracy of Psi-Blast.
-	It is recomended to read carefully the instruction and install it!
-	However, SubCons runs Psi-Blast as alternative to PRODRES (THIS MAKE SUBCONS MUCH SLOWER)
+
+SubCon is a new ensemble method for improved subcellular localization prediction in Human.
+SubCons combines up to five predictors methods, SherLoc2, LocTree2, MultiLoc2, 
+CELLO2.5 and YLoc (the latest two if available) using a random forest classifier.
+LocTree2 requires PSSM. To speed up the creation of PSSM file,
+we used our tool PRODRES (more info at https://github.com/ElofssonLab/PRODRES).
+PRODRES creates PSSM profile very fast and with the same accuracy of Psi-Blast.
+It is recomended to read carefully the instruction and install it!
+However, SubCons runs Psi-Blast as alternative to PRODRES (THIS MAKE SUBCONS MUCH SLOWER)
  
 The software is open source and licensed under the GPL license.
 
 Reference
 
-	Salvatore, M., Warholm, P., Shu, N., Basile, W., Elofsson, A., 2015. SubCons: a new ensemble method for improved subcellular localization predictions.
+Salvatore, M., Warholm, P., Shu, N., Basile, W., Elofsson, A., 2015. SubCons: a new ensemble method for improved subcellular localization predictions.
 
 Installation and usage:
 
