@@ -28,7 +28,7 @@ p <- p + theme(legend.title = element_blank(),legend.key = element_blank())+ylab
 p <- p + theme(axis.title = element_text(size = 15))
 p<-p+scale_y_continuous(expand = c(0,0))+ scale_x_discrete(expand = c(0,0))
 name<-strsplit(split_path(filex)[1],".csv")[[1]]
-p <- p + guides(fill = guide_legend(reverse = TRUE)) + ggtitle(paste("Prediction result for:",name,sep=" "))
+p <- p + guides(fill = guide_legend(reverse = TRUE)) #+ ggtitle(paste("Prediction result for:",name,sep=" "))
 p <- p + guides(fill = guide_legend(reverse = TRUE))
 ggsave(filename=paste(args[1],"/",paste(name,".png",sep=''),sep=""), plot=p,dpi = 500)
 }
