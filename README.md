@@ -129,8 +129,8 @@ To run SubCons after the installation type:
 
 NOTE:
 
-	The final prediction(s) of SubCons can be found in the folders '/SubCons-web-server/RESULTS/final-prediction' & in '/SubCons-web-server/RESULTS/plot'. 
-	The Latest contains both a stacked-barplot and a csv file with the score for each single predictor and SubCons
+	The final prediction(s) of SubCons can be found in '/SubCons-web-server/RESULTS/plot'. 
+	The Latest contains both a stacked-barplot and a csv file with the score for each single predictor and SubCons.
 
 
 
