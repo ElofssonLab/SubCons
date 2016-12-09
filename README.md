@@ -13,8 +13,8 @@ SubCons combines up to five predictors methods, SherLoc2, LocTree2, MultiLoc2,
 CELLO2.5 and YLoc (the latest two if available) using a random forest classifier.
 LocTree2 requires PSSM. To speed up the creation of PSSM file,
 we use our tool PRODRES (more info at https://github.com/ElofssonLab/PRODRES).
-PRODRES is faster in createing PSSM profile and it has the same accuracy as Psi-Blast.
-It is recomended to read carefully the instruction and install it!
+PRODRES is faster in creating PSSM profile and it has the same accuracy as Psi-Blast.
+It is recommended to read carefully the instruction and install it!
 However, SubCons runs Psi-Blast as alternative to PRODRES (THIS MAKE SUBCONS MUCH SLOWER)
  
 The software is open source and licensed under the GPL license.
@@ -51,7 +51,7 @@ Install dependencies if not installed:
 	pp-popularity-contest
 	
 NOTE:
-	It is strongly recomended to have this version of sklearn "scikit-learn 0.17.1 (https://pypi.python.org/pypi/scikit-learn/0.17.1)".
+	It is strongly recommended to have this version of sklearn "scikit-learn 0.17.1 (https://pypi.python.org/pypi/scikit-learn/0.17.1)".
 	We experienced some problem with the latest version of sklearn in using the package pickle.
 
 INSTALL libsvm 
@@ -106,7 +106,7 @@ INSTALL loctree2-data:
 
 	1-) wget ftp://rostlab.org/free/loctree2-data-1.0.2.tar.gz
 
-	2-) it is recomended to untar the folder in the same path of LocTree2
+	2-) it is recommended to untar the folder in the same path of LocTree2
 
 NOTE: IF YOU GOT AN ERROR LIKE THIS WHEN INSTALLING 
 
@@ -118,7 +118,7 @@ You maybe need to type in the terminal this command:
 
 NOTE:
    
-	1-) it is recomended to have libsvm, blast, loctree2-data and loctree2 in the same path
+	1-) it is recommended to have libsvm, blast, loctree2-data and loctree2 in the same path
 	2-) keep the tools in the folder /SubCons-web-server/TOOLS
 	3-) the folder "src" is the folder containing the SubCons scripts.
 
@@ -131,7 +131,3 @@ NOTE:
 
 	The final prediction(s) of SubCons can be found in '/SubCons-web-server/RESULTS/plot'. 
 	The Latest contains both a stacked-barplot and a csv file with the score for each single predictor and SubCons.
-
-
-
-
