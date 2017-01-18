@@ -8,12 +8,12 @@ if not len(sys.argv) == 2:
   print "Usage:",sys.argv[0],"results_folder"
   sys.exit(-1)
 
-dic_loc = {'nuclear':'NUC','plasma membrane':'MEM','extracellular':'EXE','cytoplasmic':'CYT','mitochondrial':'MIT','ER':'ERE','peroxisomal':'VES','lysosomal':'VES','Golgi apparatus':'GLG'}
-dic_sherloc2_loc = {'VES':'VES','cytoplasmic':'CYT','ER':'ERE','Golgi apparatus':'GLG','lysosomal':'VES','mitochondrial':'MIT','nuclear':'NUC','peroxisomal':'VES','plasma membrane':'MEM','extracellular':'EXC'}
-dic_loctree2_loc = {'chloroplast':'MIT','chloroplast membrane':'MIT','cytosol':'CYT','endoplasmic reticulum':'ERE','endoplasmic reticulum membrane':'ERE','golgi apparatus':'GLG','golgi apparatus membrane':'GLG','mitochondria':'MIT','mitochondria membrane':'MIT','nucleus':'NUC','nucleus membrane':'NUC','peroxisome':'VES','peroxisome membrane':'VES','plasma membrane':'MEM','plastid':'MIT','vacuole':'MIT','vacuole membrane':'MIT','secreted':'EXC'}
-dic_cello_loc ={'Cytoplasmic':'CYT','Cytoskeletal':'CYT','ER':'ERE','Golgi':'GLG','Lysosomal':'VES','Mitochondrial':'MIT','Nuclear':'NUC','Peroxisomal':'VES','PlasmaMembrane':'MEM','Extracellular':'EXC'}
-dic_yloc_loc = {'cytoplasm':'CYT','ER':'ERE','Golgi':'GLG','lysosome':'VES','mitochondrion':'MIT','nucleus':'NUC','peroxisome':'VES','plasma':'MEM','extracellular':'EXC'}
-dic_multiloc2_loc = {'VES':'VES','cytoplasmic':'CYT','ER':'ERE','Golgi apparatus':'GLG','lysosomal':'VES','mitochondrial':'MIT','nuclear':'NUC','peroxisomal':'VES','plasma membrane':'MEM','extracellular':'EXC'} 	
+dic_loc = {'nuclear':'NUC','plasma membrane':'MEM','extracellular':'EXE','cytoplasmic':'CYT','mitochondrial':'MIT','ER':'ERE','peroxisomal':'PEX','lysosomal':'LYS','Golgi apparatus':'GLG'}
+dic_sherloc2_loc = {'cytoplasmic':'CYT','ER':'ERE','Golgi apparatus':'GLG','lysosomal':'LYS','mitochondrial':'MIT','nuclear':'NUC','peroxisomal':'PEX','plasma membrane':'MEM','extracellular':'EXC'}
+dic_loctree2_loc = {'chloroplast':'MIT','chloroplast membrane':'MIT','cytosol':'CYT','endoplasmic reticulum':'ERE','endoplasmic reticulum membrane':'ERE','golgi apparatus':'GLG','golgi apparatus membrane':'GLG','mitochondria':'MIT','mitochondria membrane':'MIT','nucleus':'NUC','nucleus membrane':'NUC','peroxisome':'PEX','peroxisome membrane':'PEX','plasma membrane':'MEM','plastid':'MIT','vacuole':'MIT','vacuole membrane':'MIT','secreted':'EXC','LYS':'LYS'}
+dic_cello_loc ={'Chloroplast':'MIT','Cytoplasmic':'CYT','Cytoskeletal':'CYT','ER':'ERE','Golgi':'GLG','Lysosomal':'LYS','Mitochondrial':'MIT','Nuclear':'NUC','Peroxisomal':'PEX','PlasmaMembrane':'MEM',"Vacuole":"MIT",'Extracellular':'EXC'}
+dic_multiloc2_loc = {'cytoplasmic':'CYT','ER':'ERE','Golgi apparatus':'GLG','lysosomal':'LYS','mitochondrial':'MIT','nuclear':'NUC','peroxisomal':'PEX','plasma membrane':'MEM','extracellular':'EXC'} 
+
 
 
 
@@ -105,7 +105,7 @@ def parse_cello(cello,filename):
 		for k,v in dic_pred.iteritems():
 			k =  k.strip('\n')
 			for loc1,s in v.iteritems():
-				score = round(sum(set(s))/8,3)
+				score = round(sum(set(s))/10,2)
 				if not k in dic_cello:
 					dic_cello[k]={}
 					dic_cello[k][loc1]=score
@@ -115,6 +115,7 @@ def parse_cello(cello,filename):
 		cello_df.to_csv(sys.argv[1]+'for-dat/'+str(filename)+'.cello.csv', sep='\t', encoding='utf-8')
 	except:
 		pass
+
 
 def parse_loctree2(loctree2,filename):
 	dic_loctree2 = {}
@@ -170,13 +171,6 @@ def parse_multiloc2(multiloc2,filename):
 					line = line.replace(':',',').replace('\t',',').replace(', ',',').strip('\n')
 					ids = line.split(',')[0].strip('\n')
 					d = dict(itertools.izip_longest(*[iter(line.split(',')[1:])] * 2, fillvalue=""))			
-					x = list(''.join(value) for key, value in d.items() if 'lysosomal' in key or "peroxisomal" in key)
-					d.pop('lysosomal')
-					d.pop('peroxisomal')
-					a = float(x[0])
-					b = float(x[1])
-					x1 = round(float(a+b),3)
-					d['VES']=x1
 					d3 = {v2:v for k2,v2 in dic_multiloc2_loc.iteritems() for k,v in d.iteritems() if k==k2}
 					dic_multiloc2[ids]=d3
 	
@@ -194,60 +188,11 @@ def parse_sherloc2(sherloc2,filename):
 				line = line.replace(':',',').replace('\t',',').replace(', ',',').strip('\n')
 				ids = line.split(',')[0].strip('\n')
 				d4 = dict(itertools.izip_longest(*[iter(line.split(',')[1:])] * 2, fillvalue=""))
-				x = list(''.join(value) for key, value in d4.items() if 'lysosomal' in key or "peroxisomal" in key)
-				d4.pop('lysosomal')
-				d4.pop('peroxisomal')
-				a = float(x[0])
-				b = float(x[1])
-				x1 = round(float(a+b),3)
-				d4['VES']=x1
 				d5 = {v2:v for k2,v2 in dic_sherloc2_loc.iteritems() for k,v in d4.iteritems() if k==k2}
 				dic_sherloc2[ids]=d5
 	
 	sherloc2_df = pd.DataFrame(dic_sherloc2).T
 	sherloc2_df.to_csv(sys.argv[1]+'for-dat/'+str(filename)+'.sherloc2.csv', sep='\t', encoding='utf-8')
-
-def parse_yloc(yloc,filename):
-	dic_yloc = {}
-	try:
-		for line in yloc:
-			sp_id1 = line.split(',')[0].strip('\n')
-			loc = line.split(',')[1].split(' ')[0].strip('\n')
-			score = line.split(',')[1].split('(')[1].replace(')','').replace('%','')
-			score = round(float(score)/100,3)
-			if loc in dic_yloc_loc.keys():
-				loc = loc.replace(loc,dic_yloc_loc[loc])
-				if not sp_id1 in dic_yloc:
-					dic_yloc[sp_id1]={}
-					dic_yloc[sp_id1][loc]=score
-				if sp_id1 in dic_yloc:
-					dic_yloc[sp_id1][loc]=score
-	
-		yloc_df = pd.DataFrame(dic_yloc).T
-		
-		## CHECK THE ONLY LOCALIZATION FROM YLOC AND THEN
-		## ADD COLUMNS WITH VALUE = 0 BECAUSE YLOC GIVE SINGLE LOCALIZATION
-		loc_not_present_in_yloc = []
-	
-		for k,v in dic_yloc_loc.iteritems():
-			loc_not_present_in_yloc.append(v)
-		
-		loc_df_in_yloc = list(yloc_df.columns.values)
-	
-	
-		if loc_df_in_yloc[0] in set(loc_not_present_in_yloc):
-			to_add_in_yloc = list(set(loc_not_present_in_yloc)-set(loc_df_in_yloc))
-	
-		lack_loc_in_yloc = sorted(to_add_in_yloc)
-	
-		for col_in_yloc in lack_loc_in_yloc:
-	    		yloc_df[col_in_yloc] = 0.0
-		yloc_df = yloc_df.fillna(0.0)
-		yloc_df = yloc_df.sort_index(axis=1)
-		yloc_df.to_csv(sys.argv[1]+'for-dat/'+str(filename)+'.yloc.csv', sep='\t', encoding='utf-8')
-	
-	except:
-		pass
 	
 			
 	
@@ -274,8 +219,6 @@ for el in paths_results:
 		file_pred = open(sys.argv[1]+'prediction/'+str(predictor_used))
 		parse_cello(file_pred,name_file)
 	
-	if predictor_used.endswith(".y.res"):
-		file_pred = open(sys.argv[1]+'prediction/'+str(predictor_used))
-		parse_yloc(file_pred,name_file)
+
 		
 
