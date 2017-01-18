@@ -142,6 +142,7 @@ fi
 
 echo "CREATE PSSM File"
 outpath_PRODRES=$TMPDIR/rst_prodres
+#outpath_PRODRES=$OUTDIR
 mkdir -p $outpath_PRODRES
 #exec_cmd "python $exec_PRODRES --input $SEQFILE --output $outpath_PRODRES --pfam-dir $PRODRES_PATH/databases/ --pfamscan-script $PfamScan_PATH/pfam_scan.pl --pfamscan_bitscore 2 --uniprot-db-fasta $PRODRES_PATH/databases/blastdb/uniref90.fasta --second-search psiblast --psiblast_e-val 0.001 --psiblast_iter 3 --verbose"
 exec_cmd "python $exec_PRODRES --input $SEQFILE --output $outpath_PRODRES --pfam-dir $PRODRES_PATH/databases/ --pfamscan-script $PfamScan_PATH/pfam_scan.pl --uniprot-db-fasta $PRODRES_PATH/databases/blastdb/uniref90.fasta --second-search psiblast --psiblast_e-val 0.001 --psiblast_iter 3 --verbose"
@@ -204,23 +205,23 @@ else
 fi
 
 
-if [ $is_run_yloc -eq 1 ];then
-    resfile_yloc=$OUTDIR/prediction/${rootname_seqfile}.y.res
+#if [ $is_run_yloc -eq 1 ];then
+#    resfile_yloc=$OUTDIR/prediction/${rootname_seqfile}.y.res
 
-    if [ $success4 -eq 1 ];then
-        echo "RUNNING YLOC"
-        #exec_cmd "python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc"
+#    if [ $success4 -eq 1 ];then
+#        echo "RUNNING YLOC"
+#        #exec_cmd "python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc"
 
-    fi
+#    fi
 
-    success4=0
-    if [ -s $resfile_yloc ];then
-        success4=1
-    else
-        echo "Failed to run yloc, resfile_yloc $resfile_yloc does not exist or empty" >&2
-        exec_cmd "mv $resfile_yloc $TMPDIR/"
-    fi
-fi
+#    success4=0
+#   if [ -s $resfile_yloc ];then
+#        success4=1
+#    else
+#        echo "Failed to run yloc, resfile_yloc $resfile_yloc does not exist or empty" >&2
+#        exec_cmd "mv $resfile_yloc $TMPDIR/"
+#    fi
+#fi
 
 resfile_cello=$OUTDIR/prediction/${rootname_seqfile}.c.res
 
