@@ -36,7 +36,6 @@ Install dependencies if not installed:
 	numpy
 	scipy
 	scikit-learn 0.17.1 (https://pypi.python.org/pypi/scikit-learn/0.17.1)
-	python-ZSI
 	python-mechanize
 	pandas
 	matplotlib
@@ -83,15 +82,13 @@ INSTALL MultiLoc2:
 
 INSTALL SherLoc2:
 
-	python TOOLS/MultiLoc2/configureSL2.py
+	python TOOLS/SherLoc2/configureSL2.py
 
-INSTALL YLoc: (it is not working at the moment, we do not garantee its usage!)
-	
-	Use "wsdl2py" to create YLocSOAP_services.py and YLocSOAP_services_types.py
 
 NO INSTALLATION NEEDED FOR CELLO2.5 since runs through the script in /TOOLS/cello.py
 
-We provide MultiLoc2, SherLoc2, YLoc, CELLO2.5 insted for LocTree2 follow the instruction (if something goes wrong refer to https://rostlab.org/owiki/index.php/Packages)
+We provide MultiLoc2, SherLoc2, and CELLO2.5. 
+For LocTree2 follow the instruction (if something goes wrong refer to https://rostlab.org/owiki/index.php/Packages)
 
 INSTALL LocTree2 (https://rostlab.org/owiki/index.php/Debian_repository):
 
