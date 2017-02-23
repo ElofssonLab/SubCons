@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage="
-USAGE: $0 SEQFILE OUTDIR 
+USAGE: $0 SEQFILE OUTDIR  TMPDIR
 "
 
 
@@ -59,7 +59,7 @@ if (("$count" == 1));then
 		exit 1
 	fi
 
-	
+
 elif (("$count" > 1));then
 
 	if [[ -f "$resfile_loctree2" && "$resfile_sherloc2" && "$resfile_multiloc2" ]]
@@ -71,7 +71,7 @@ elif (("$count" > 1));then
 	fi
 
 fi
-	
+
 sleep 1
 
 echo "Parse prediction and obtain test file"
@@ -98,6 +98,6 @@ python src/create_dataframe_plot.py $OUTDIR
 Rscript src/plot.R $OUTDIR/plot
 
 echo "REMOVE UNNECESSARY INTERMEDIATE FILES"
-rm $OUTDIR/prediction/*.res 
+#rm $OUTDIR/prediction/*.res 
 
-rm $OUTDIR/dat-files/*.dat
+#rm $OUTDIR/dat-files/*.dat

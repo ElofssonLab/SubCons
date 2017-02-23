@@ -9,42 +9,17 @@ if not len(sys.argv) == 2:
 
 def create_merged_dataframe(list_pred,a):
 	global df_final1
-	if len(list_pred)==5:
+	if len(list_pred)==4:
 		predictor1 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[0])+".csv", sep='\t', encoding='utf-8')
 		predictor2 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[1])+".csv", sep='\t', encoding='utf-8')
 		predictor3 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[2])+".csv", sep='\t', encoding='utf-8')
 		predictor4 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[3])+".csv", sep='\t', encoding='utf-8')
-		predictor5 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[4])+".csv", sep='\t', encoding='utf-8')
-		df_1 = pd.DataFrame(predictor4).merge(pd.DataFrame(predictor5),on='Unnamed: 0').merge(pd.DataFrame(predictor3),on='Unnamed: 0')
+		df_1 = pd.DataFrame(predictor4).merge(pd.DataFrame(predictor3),on='Unnamed: 0')
 		df_2 = pd.DataFrame(predictor2).merge(pd.DataFrame(predictor1),on='Unnamed: 0')
 		df_final = pd.merge(df_1,df_2,on='Unnamed: 0',how='inner')
 		df_final1 = df_final.rename(columns={'Unnamed: 0': 'IDs'})
-		df_final1.columns =['IDs','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40']
+		df_final1.columns =['IDs','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36']
 		return df_final1
-
-	if len(list_pred)==4:
-		if "cello" in list_pred:
-			predictor1 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[0])+".csv", sep='\t', encoding='utf-8')
-			predictor2 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[1])+".csv", sep='\t', encoding='utf-8')
-			predictor3 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[2])+".csv", sep='\t', encoding='utf-8')
-			predictor4 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[3])+".csv", sep='\t', encoding='utf-8')
-			df_1 = pd.DataFrame(predictor4).merge(pd.DataFrame(predictor3),on='Unnamed: 0')
-			df_2 = pd.DataFrame(predictor2).merge(pd.DataFrame(predictor1),on='Unnamed: 0')
-			df_final = pd.merge(df_1,df_2,on='Unnamed: 0',how='inner')
-			df_final1 = df_final.rename(columns={'Unnamed: 0': 'IDs'})
-			df_final1.columns =['IDs','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32']
-			return df_final1
-		else:
-			predictor1 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[0])+".csv", sep='\t', encoding='utf-8')
-			predictor2 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[1])+".csv", sep='\t', encoding='utf-8')
-			predictor3 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[2])+".csv", sep='\t', encoding='utf-8')
-			predictor4 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[3])+".csv", sep='\t', encoding='utf-8')
-			df_1 = pd.DataFrame(predictor3).merge(pd.DataFrame(predictor4),on='Unnamed: 0')
-			df_2 = pd.DataFrame(predictor2).merge(pd.DataFrame(predictor1),on='Unnamed: 0')
-			df_final = pd.merge(df_1,df_2,on='Unnamed: 0',how='inner')
-			df_final1 = df_final.rename(columns={'Unnamed: 0': 'IDs'})
-			df_final1.columns =['IDs','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32']
-			return df_final1
 
 	elif len(list_pred) == 3:
 		predictor1 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[0])+".csv", sep='\t', encoding='utf-8')
@@ -52,7 +27,7 @@ def create_merged_dataframe(list_pred,a):
 		predictor3 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[2])+".csv", sep='\t', encoding='utf-8')
 		df_1 = pd.DataFrame(predictor3).merge(pd.DataFrame(predictor2),on='Unnamed: 0').merge(pd.DataFrame(predictor1),on='Unnamed: 0')
 		df_final1 = df_1.rename(columns={'Unnamed: 0': 'IDs'})
-		df_final1.columns =['IDs','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24']
+		df_final1.columns =['IDs','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27']
 		return df_final1
 
 
