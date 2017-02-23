@@ -85,7 +85,7 @@ RUNTOOL=$rundir/TOOLS
 PRODRES_PATH=$rundir/apps/PRODRES
 PfamScan_PATH=$rundir/apps/PfamScan
 
-export PERL5LIB=$PERL5LIB:PfamScan_PATH
+export PERL5LIB=$PERL5LIB:$PfamScan_PATH
 
 PRODRES_PATH=$(readlink -f $PRODRES_PATH)
 
