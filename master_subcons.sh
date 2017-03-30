@@ -141,6 +141,9 @@ fi
 # echo -e "\nPERL INV" >> $tmp_log_apache_env_file
 # perl -e "print \"@INC\"" | tr ' ' '\n'  >> $tmp_log_apache_env_file
 
+res1=
+res2=
+res1=$(/bin/date +%s.%N)
 
 echo "CREATE PSSM File"
 outpath_PRODRES=$TMPDIR/rst_prodres
@@ -293,6 +296,11 @@ else
 	exec_cmd "mv  -f $OUTDIR/* $TMPDIR/"
 
 fi
+
+res2=$(/bin/date +%s.%N)
+timefile=$OUTDIR/time.txt
+runtime=$(echo "$res2 - $res1"|/usr/bin/bc)
+echo "0;$runtime" > $timefile
 
 echo "REMOVE UNNECESSARY INTERMEDIATE FILES"
 
