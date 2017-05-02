@@ -21,8 +21,7 @@ The software is open source and licensed under the GPL license.
 
 Reference
 
-Salvatore, M., Warholm, P., Shu, N., Basile, W., Elofsson, A., 2015. SubCons: a new ensemble method for improved subcellular localization predictions.
-
+Salvatore, M., Warholm, P., Shu, N., Basile, W. and Elofsson, A. (Epub 2017) SubCons: a new ensemble method for improved human subcellular localization predictions. Bioinformatics (Epub ahead of print)
 Installation and usage:
 
 Check out the software from the github by:
