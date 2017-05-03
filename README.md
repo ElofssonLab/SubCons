@@ -21,11 +21,11 @@ The software is open source and licensed under the GPL license.
 
 Reference
 
-Salvatore, M., Warholm, P., Shu, N., Basile, W. and Elofsson, A. (Epub 2017) SubCons: a new ensemble method for improved human subcellular localization predictions. Bioinformatics (Epub ahead of print)
+Salvatore M., Warholm P., Shu N., Basile W. and Elofsson A. (Epub 2017) SubCons: a new ensemble method for improved human subcellular localization predictions. Bioinformatics (Epub ahead of print)
 
 Installation and usage:
 
-Check out the software from the github by:
+Check out the software from bitbucket by:
 
 	git clone https://bitbucket.org/salvatore_marco/subcons-web-server
 
@@ -36,7 +36,6 @@ Install dependencies if not installed:
 	numpy
 	scipy
 	scikit-learn 0.17.1 (https://pypi.python.org/pypi/scikit-learn/0.17.1)
-	python-ZSI
 	python-mechanize
 	pandas
 	matplotlib
@@ -44,8 +43,9 @@ Install dependencies if not installed:
 	time
 	collections
 	pickle
-	R library ggplot2 (recomended latest R version)
-	R library reshape (recomended latest R version)
+	bokeh
+	R library ggplot2 (recomended latest R version) (It is not necessary in the latest version, we now use bokeh)
+	R library reshape (recomended latest R version) (It is not necessary in the latest version, we now use bokeh)
 	ncbi-blast+ or blast2
 	libsvm 
 	pp-popularity-contest
@@ -83,15 +83,13 @@ INSTALL MultiLoc2:
 
 INSTALL SherLoc2:
 
-	python TOOLS/MultiLoc2/configureSL2.py
+	python TOOLS/SherLoc2/configureSL2.py
 
-INSTALL YLoc: (it is not working at the moment, we do not garantee its usage!)
-	
-	Use "wsdl2py" to create YLocSOAP_services.py and YLocSOAP_services_types.py
 
 NO INSTALLATION NEEDED FOR CELLO2.5 since runs through the script in /TOOLS/cello.py
 
-We provide MultiLoc2, SherLoc2, YLoc, CELLO2.5 insted for LocTree2 follow the instruction (if something goes wrong refer to https://rostlab.org/owiki/index.php/Packages)
+We provide MultiLoc2, SherLoc2, and CELLO2.5. 
+For LocTree2 follow the instruction (if something goes wrong refer to https://rostlab.org/owiki/index.php/Packages)
 
 INSTALL LocTree2 (https://rostlab.org/owiki/index.php/Debian_repository):
 
@@ -129,5 +127,5 @@ To run SubCons after the installation type:
 
 NOTE:
 
-	The final prediction(s) of SubCons can be found in '/SubCons-web-server/RESULTS/plot'. 
+	The final prediction(s) of SubCons can be found in '/SubCons-web-server/OUTDIR/plot'. 
 	The Latest contains both a stacked-barplot and a csv file with the score for each single predictor and SubCons.

@@ -12,45 +12,9 @@ if not len(sys.argv) == 2:
 
 def predictors_merged_dataframe(list_pred,a):
 	global df_final1
-	if len(list_pred)==5:
-		list_pred = sorted(list_pred)
-		predictor1 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[0])+".csv", sep='\t', encoding='utf-8')
-		predictor2 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[1])+".csv", sep='\t', encoding='utf-8')
-		predictor3 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[2])+".csv", sep='\t', encoding='utf-8')
-		predictor4 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[3])+".csv", sep='\t', encoding='utf-8')
-		predictor5 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[4])+".csv", sep='\t', encoding='utf-8')
-		df_subcons = pd.read_csv(sys.argv[1]+"/final-prediction/"+str(k)+".subcons-final-pred.csv",sep = '\t', encoding='utf-8')
-		df_1 = [predictor1,predictor2,predictor3,predictor4,predictor5]
-		df_final = pd.concat(df_1)		
-		df_final1 = df_final.rename(columns={'Unnamed: 0': 'id_protein'})
-		df_final1 = df_final1.drop('id_protein',1)
-		df_subcons_1 = df_subcons.drop('LOC_DEF',1)
-		df_subcons_1 = df_subcons_1.drop('id_protein',1)
-		new_columns = df_subcons_1.columns[df_subcons_1.ix[df_subcons_1.last_valid_index()].argsort()]
-		df_subcons_1 =  df_subcons_1[new_columns]
-		df_final1 = df_final1[new_columns]
-		df_all = df_final1.append(df_subcons_1,ignore_index=True)
-		list_pred.append("SubCons")
-		se = pd.Series(list_pred)
-		df_all['Tools'] = se.values
-		cols = df_all.columns.tolist()
-		cols = cols[-1:] + cols[:-1]
-		df_all = df_all[cols]
-                df_all.set_index("Tools", drop=True, inplace=True)
-                dictionary = df_all.to_dict(orient = "index")
-                dictionary['LocTree2'] = dictionary.pop('loctree2')
-                dictionary['MultiLoc2'] = dictionary.pop('multiloc2')
-                dictionary['SherLoc2'] = dictionary.pop('sherloc2')
-                dictionary['YLoc'] = dictionary.pop('yloc')
-                dictionary['CELLO2.5'] = dictionary.pop('cello')
-                df_finished= pd.DataFrame(dictionary)
-                df_finished =  df_finished.T
-                final_columns = df_finished.columns[df_finished.ix[df_finished.last_valid_index()].argsort()]
-                df_finished = df_finished[final_columns]
-                df_finished.to_csv(sys.argv[1]+'/plot/'+str(predictor1["Unnamed: 0"][0])+'.csv', sep='\t', encoding='utf-8')
 
 		
-	elif len(list_pred)==4:
+	if len(list_pred)==4:
 		list_pred = sorted(list_pred)
 		predictor1 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[0])+".csv", sep='\t', encoding='utf-8')
 		predictor2 = pd.read_csv(sys.argv[1]+"/for-dat/"+str(k)+"."+str(list_pred[1])+".csv", sep='\t', encoding='utf-8')
@@ -78,10 +42,7 @@ def predictors_merged_dataframe(list_pred,a):
 		dictionary['LocTree2'] = dictionary.pop('loctree2')
 		dictionary['MultiLoc2'] = dictionary.pop('multiloc2')
 		dictionary['SherLoc2'] = dictionary.pop('sherloc2')
-		if 'yloc' in dictionary.keys():
-			dictionary['YLoc'] = dictionary.pop('yloc')
-		else:	
-			dictionary['CELLO2.5'] = dictionary.pop('cello')
+		dictionary['CELLO2.5'] = dictionary.pop('cello')
 		df_finished= pd.DataFrame(dictionary)
 		df_finished =  df_finished.T
 		final_columns = df_finished.columns[df_finished.ix[df_finished.last_valid_index()].argsort()]

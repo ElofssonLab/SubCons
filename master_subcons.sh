@@ -85,6 +85,8 @@ RUNTOOL=$rundir/TOOLS
 PRODRES_PATH=$rundir/apps/PRODRES
 PfamScan_PATH=$rundir/apps/PfamScan
 
+export PERL5LIB=$PERL5LIB:$PfamScan_PATH
+
 PRODRES_PATH=$(readlink -f $PRODRES_PATH)
 
 exec_PRODRES=$PRODRES_PATH/PRODRES/PRODRES.py
@@ -139,9 +141,13 @@ fi
 # echo -e "\nPERL INV" >> $tmp_log_apache_env_file
 # perl -e "print \"@INC\"" | tr ' ' '\n'  >> $tmp_log_apache_env_file
 
+res1=
+res2=
+res1=$(/bin/date +%s.%N)
 
 echo "CREATE PSSM File"
 outpath_PRODRES=$TMPDIR/rst_prodres
+#outpath_PRODRES=$OUTDIR
 mkdir -p $outpath_PRODRES
 #exec_cmd "python $exec_PRODRES --input $SEQFILE --output $outpath_PRODRES --pfam-dir $PRODRES_PATH/databases/ --pfamscan-script $PfamScan_PATH/pfam_scan.pl --pfamscan_bitscore 2 --uniprot-db-fasta $PRODRES_PATH/databases/blastdb/uniref90.fasta --second-search psiblast --psiblast_e-val 0.001 --psiblast_iter 3 --verbose"
 exec_cmd "python $exec_PRODRES --input $SEQFILE --output $outpath_PRODRES --pfam-dir $PRODRES_PATH/databases/ --pfamscan-script $PfamScan_PATH/pfam_scan.pl --uniprot-db-fasta $PRODRES_PATH/databases/blastdb/uniref90.fasta --second-search psiblast --psiblast_e-val 0.001 --psiblast_iter 3 --verbose"
@@ -204,23 +210,23 @@ else
 fi
 
 
-if [ $is_run_yloc -eq 1 ];then
-    resfile_yloc=$OUTDIR/prediction/${rootname_seqfile}.y.res
+#if [ $is_run_yloc -eq 1 ];then
+#    resfile_yloc=$OUTDIR/prediction/${rootname_seqfile}.y.res
 
-    if [ $success4 -eq 1 ];then
-        echo "RUNNING YLOC"
-        #exec_cmd "python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc"
+#    if [ $success4 -eq 1 ];then
+#        echo "RUNNING YLOC"
+#        #exec_cmd "python $RUNTOOL/YLocSOAPclient/yloc.py $SEQFILE YLoc-HighRes Animals No Simple > $resfile_yloc"
 
-    fi
+#    fi
 
-    success4=0
-    if [ -s $resfile_yloc ];then
-        success4=1
-    else
-        echo "Failed to run yloc, resfile_yloc $resfile_yloc does not exist or empty" >&2
-        exec_cmd "mv $resfile_yloc $TMPDIR/"
-    fi
-fi
+#    success4=0
+#   if [ -s $resfile_yloc ];then
+#        success4=1
+#    else
+#        echo "Failed to run yloc, resfile_yloc $resfile_yloc does not exist or empty" >&2
+#        exec_cmd "mv $resfile_yloc $TMPDIR/"
+#    fi
+#fi
 
 resfile_cello=$OUTDIR/prediction/${rootname_seqfile}.c.res
 
@@ -282,7 +288,8 @@ if [ -e $resfile_loctree2 -a -e $resfile_sherloc2 -a -e $resfile_loctree2 ];then
 	echo "Plot Results"
 
 	exec_cmd "python $rundir/src/create_dataframe_plot.py $OUTDIR/"
-	exec_cmd "Rscript $rundir/src/plot.R $OUTDIR/plot"
+	exec_cmd "python $rundir/src/plot.py $OUTDIR/"
+	#exec_cmd "Rscript $rundir/src/plot.R $OUTDIR/plot"
 
 
 else
@@ -290,6 +297,11 @@ else
 	exec_cmd "mv  -f $OUTDIR/* $TMPDIR/"
 
 fi
+
+res2=$(/bin/date +%s.%N)
+timefile=$OUTDIR/time.txt
+runtime=$(echo "$res2 - $res1"|/usr/bin/bc)
+echo "0;$runtime" > $timefile
 
 echo "REMOVE UNNECESSARY INTERMEDIATE FILES"
 
