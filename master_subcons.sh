@@ -288,7 +288,8 @@ if [ -e $resfile_loctree2 -a -e $resfile_sherloc2 -a -e $resfile_loctree2 ];then
 	echo "Plot Results"
 
 	exec_cmd "python $rundir/src/create_dataframe_plot.py $OUTDIR/"
-	exec_cmd "Rscript $rundir/src/plot.R $OUTDIR/plot"
+	exec_cmd "python $rundir/src/plot.py $OUTDIR/"
+	#exec_cmd "Rscript $rundir/src/plot.R $OUTDIR/plot"
 
 
 else
