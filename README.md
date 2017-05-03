@@ -21,10 +21,11 @@ The software is open source and licensed under the GPL license.
 
 Reference
 
-Salvatore, M., Warholm, P., Shu, N., Basile, W. and Elofsson, A. (Epub 2017) SubCons: a new ensemble method for improved human subcellular localization predictions. Bioinformatics (Epub ahead of print)
+Salvatore M., Warholm P., Shu N., Basile W. and Elofsson A. (Epub 2017) SubCons: a new ensemble method for improved human subcellular localization predictions. Bioinformatics (Epub ahead of print)
+
 Installation and usage:
 
-Check out the software from the github by:
+Check out the software from bitbucket by:
 
 	git clone https://bitbucket.org/salvatore_marco/subcons-web-server
 
@@ -42,8 +43,9 @@ Install dependencies if not installed:
 	time
 	collections
 	pickle
-	R library ggplot2 (recomended latest R version)
-	R library reshape (recomended latest R version)
+	bokeh
+	R library ggplot2 (recomended latest R version) (It is not necessary in the latest version, we now use bokeh)
+	R library reshape (recomended latest R version) (It is not necessary in the latest version, we now use bokeh)
 	ncbi-blast+ or blast2
 	libsvm 
 	pp-popularity-contest
@@ -125,5 +127,5 @@ To run SubCons after the installation type:
 
 NOTE:
 
-	The final prediction(s) of SubCons can be found in '/SubCons-web-server/RESULTS/plot'. 
+	The final prediction(s) of SubCons can be found in '/SubCons-web-server/OUTDIR/plot'. 
 	The Latest contains both a stacked-barplot and a csv file with the score for each single predictor and SubCons.
