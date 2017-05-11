@@ -43,9 +43,6 @@ Install dependencies if not installed:
 	time
 	collections
 	pickle
-	bokeh
-	R library ggplot2 (recomended latest R version) (It is not necessary in the latest version, we now use bokeh)
-	R library reshape (recomended latest R version) (It is not necessary in the latest version, we now use bokeh)
 	ncbi-blast+ or blast2
 	libsvm 
 	pp-popularity-contest
