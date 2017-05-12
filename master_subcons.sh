@@ -22,6 +22,10 @@ OPTIONS:
 VERBOSE=0
 DEBUG=0
 
+if [ "$DISPLAY" == "" ];then
+    export DISPLAY=localhost:0.0
+fi
+
 domain=euka
 #yloc is not run in this versino of subcons, might be implemented in the future versions
 is_run_yloc=0
