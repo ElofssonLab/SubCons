@@ -127,6 +127,7 @@ for files_csv in os.listdir(sys.argv[1]+"/plot/"):
 	plt.gca().xaxis.grid(True)
 	plt.autoscale(tight=True)
 	plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".pdf",transparent=True,dpi = 500)
+	plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".png",transparent=False,dpi = 300)
 
 
 		
