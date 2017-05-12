@@ -2,6 +2,7 @@ import numpy as np
 import sys,glob,os
 import pandas as pd
 import matplotlib.pyplot as plt
+ 
 
 
 if not len(sys.argv) == 2:
@@ -115,7 +116,7 @@ for files_csv in os.listdir(sys.argv[1]+"/plot/"):
 	data = pd.read_csv(sys.argv[1]+"/plot/"+str(files_csv), sep='\t', encoding='utf-8')
 	plt.figure(figsize=(20,10))
 	ind = np.arange(len(data[data.columns[0]]))  
-	colors = {"MIT":'#1f77b4',"NUC":'#ff7f0e',"CYT":'#7f7f7f',"ERE":'#d62728',"EXC":'#9467bd',"GLG":'#bcbd22',"MEM":'#98df8a',"LYS":'#17becf',"PEX":'#393b79'}
+	colors = {"GLG":'#1f77b4',"NUC":'#ff7f0e',"EXC":'#7f7f7f',"MIT":'#d62728',"PEX":'#9467bd',"CYT":'#bcbd22',"MEM":'#98df8a',"LYS":'#17becf',"ERE":'#393b79'}
 	localizations = data.columns.values[1:]
 	localizations = localizations.tolist()
 	data.plot(kind="barh", stacked=True, color=[colors[i] for i in data[localizations]])
@@ -125,7 +126,7 @@ for files_csv in os.listdir(sys.argv[1]+"/plot/"):
 	plt.gca().yaxis.grid(False)
 	plt.gca().xaxis.grid(True)
 	plt.autoscale(tight=True)
-	plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".png",transparent=True,dpi = 500)
+	plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".pdf",transparent=True,dpi = 500)
 
 
 		
