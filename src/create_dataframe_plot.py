@@ -2,9 +2,12 @@ import numpy as np
 import sys,glob,os
 import pandas as pd
 import matplotlib as mpl
+import matplotlib.gridspec as gridspec
 mpl.use('Agg')
 import matplotlib.pyplot as plt
  
+rundir = os.path.dirname(os.path.realpath(__file__))
+basedir = os.path.realpath("%s/../"%(rundir))
 
 
 if not len(sys.argv) == 2:
@@ -114,22 +117,77 @@ for k,v in dic_all.iteritems():
 for files_csv in os.listdir(sys.argv[1]+"/plot/"):
 	print files_csv
 	name_plot = files_csv.split('.')[0]
-
-	data = pd.read_csv(sys.argv[1]+"/plot/"+str(files_csv), sep='\t', encoding='utf-8')
-	plt.figure(figsize=(20,10))
-	ind = np.arange(len(data[data.columns[0]]))  
+	others = pd.read_csv('%s/precision-score/others.csv'%(basedir),sep = ',')
+	results = pd.read_csv(sys.argv[1]+"/plot/"+str(files_csv), sep='\t', encoding='utf-8')
+	cyt = pd.read_csv('%s/precision-score/cyt-precision-score.csv'%(basedir),sep = ',')
+	nuc = pd.read_csv('%s/precision-score/nuc-precision-score.csv'%(basedir),sep = ',')
+	loc_subcons = round(float(results.iloc[4][1]),1)
+	results.set_index('Unnamed: 0', inplace=True)
+	decimals = pd.Series([2, 2], index=['Average','Unnamed: 6'])
+	cyt = cyt.round(decimals)
+	nuc = nuc.round(decimals)
+	others = others.round(decimals)
+	cyt_score = cyt.loc[cyt['Average'] == (round(results.iloc[4]['CYT'],2))]
+	nuc_score = nuc.loc[nuc['Average'] == (round(results.iloc[4]['NUC'],2))]
+	mit_score = others.loc[others['Average'] == (round(results.iloc[4]['MIT'],2))]
+	pex_score = others.loc[others['Average'] == (round(results.iloc[4]['PEX'],2))]
+	mem_score = others.loc[others['Average'] == (round(results.iloc[4]['MEM'],2))]
+	lys_score = others.loc[others['Average'] == (round(results.iloc[4]['LYS'],2))]
+	ere_score = others.loc[others['Average'] == (round(results.iloc[4]['ERE'],2))]
+	glg_score = others.loc[others['Average'] == (round(results.iloc[4]['GLG'],2))]
+	exc_score = others.loc[others['Average'] == (round(results.iloc[4]['EXC'],2))]
+	dic_cyt = cyt_score.set_index('Average').to_dict() 
+	dic_ere = ere_score.set_index('Average').to_dict() 
+	dic_glg = glg_score.set_index('Average').to_dict() 
+	dic_lys = lys_score.set_index('Average').to_dict() 
+	dic_mem = mem_score.set_index('Average').to_dict() 
+	dic_mit = mit_score.set_index('Average').to_dict() 
+	dic_nuc = nuc_score.set_index('Average').to_dict() 
+	dic_pex = pex_score.set_index('Average').to_dict()
+	dic_exc = exc_score.set_index('Average').to_dict() 
+	final_cyt = round(dic_cyt['Unnamed: 6'][(round(results.iloc[4]['CYT'],2))],2)
+	final_ere = round(dic_ere['Unnamed: 6'][(round(results.iloc[4]['ERE'],2))],2)
+	final_glg = round(dic_glg['Unnamed: 6'][(round(results.iloc[4]['GLG'],2))],2)
+	final_lys = round(dic_lys['Unnamed: 6'][(round(results.iloc[4]['LYS'],2))],2)
+	final_mem = round(dic_mem['Unnamed: 6'][(round(results.iloc[4]['MEM'],2))],2)
+	final_mit = round(dic_mit['Unnamed: 6'][(round(results.iloc[4]['MIT'],2))],2)
+	final_nuc = round(dic_nuc['Unnamed: 6'][(round(results.iloc[4]['NUC'],2))],2)
+	final_pex = round(dic_pex['Unnamed: 6'][(round(results.iloc[4]['PEX'],2))],2)
+	final_exc = round(dic_exc['Unnamed: 6'][(round(results.iloc[4]['EXC'],2))],2)
+	new_dataframe = [final_cyt,final_ere,final_glg,final_lys,final_mem,final_mit,final_nuc,final_pex,final_exc]
+	loc_plot = results.axes[1].tolist()
+	correct = {"NUC":final_nuc,"CYT":final_cyt,"ERE":final_ere,"GLG":final_glg,"LYS":final_lys,"MEM":final_mem,"MIT":final_mit,"PEX":final_pex,"EXC":final_exc}
+	df_average_score = pd.DataFrame(correct,index=['SubCons-Reliability'], columns=loc_plot)
+	loc_def_subcons = round(df_average_score.ix[:,0][0],2)
+	frames = [results,df_average_score]
+	final_df = pd.concat(frames)
+	
+	plt.figure(1,figsize=(10,10),frameon=False)
+	gs = gridspec.GridSpec(2, 2,width_ratios=[5, 1],height_ratios=[1, 4])
+	ax2 = plt.subplot(gs[0])
+	ind = np.arange(len(final_df[final_df.columns[0]]))  
 	colors = {"GLG":'#1f77b4',"NUC":'#ff7f0e',"EXC":'#7f7f7f',"MIT":'#d62728',"PEX":'#9467bd',"CYT":'#bcbd22',"MEM":'#98df8a',"LYS":'#17becf',"ERE":'#393b79'}
-	localizations = data.columns.values[1:]
+	localizations = final_df.columns.values[0:]
 	localizations = localizations.tolist()
-	data.plot(kind="barh", stacked=True, color=[colors[i] for i in data[localizations]])
-	plt.yticks(ind, data[data.columns[0]],fontsize = 11)
-	plt.legend(loc="best", bbox_to_anchor=(1.0, 1.00))
-	plt.subplots_adjust(right=0.75)
+	final_df.iloc[5:6].plot(ax=plt.gca(),kind="barh", stacked=True,color=[colors[i] for i in final_df[localizations]], width=0.6,linewidth=4.0)
+	#plt.annotate(loc_def_subcons, (0.021, -0.00019),  fontsize=30)
+	plt.yticks(fontsize = 13,fontweight='bold')
+	plt.tick_params(axis='x',which='both',bottom='off',top='off',labelbottom='off') 
+	plt.legend().set_visible(False)
+	plt.xlim(0,1)
+
+	ax4 = plt.subplot(gs[2])
+	ind = np.arange(len(final_df[final_df.columns[0]]))  
+	colors = {"GLG":'#1f77b4',"NUC":'#ff7f0e',"EXC":'#7f7f7f',"MIT":'#d62728',"PEX":'#9467bd',"CYT":'#bcbd22',"MEM":'#98df8a',"LYS":'#17becf',"ERE":'#393b79'}
+	localizations = final_df.columns.values[0:]
+	localizations = localizations.tolist()
+	final_df.iloc[0:5].plot(ax=plt.gca(),kind="barh", stacked=True,color=[colors[i] for i in final_df[localizations]],width=0.5)
+	plt.yticks(ind, final_df.axes[0].tolist()[0:4]+["SubCons-RF-Score"],fontsize = 11)
+	plt.legend(fontsize = 8,loc="best", ncol=9,bbox_to_anchor=(1,1.25), frameon=False)
 	plt.gca().yaxis.grid(False)
-	plt.gca().xaxis.grid(True)
-	plt.autoscale(tight=True)
-	plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".pdf",transparent=True,dpi = 500)
-	plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".png",transparent=False,dpi = 300)
-
-
-		
+	plt.gca().xaxis.grid(False)
+	plt.tight_layout()
+	plt.subplots_adjust(hspace=0)
+	final_df.to_csv(sys.argv[1]+'/plot/'+str(name_plot)+'_final.csv', sep='\t', encoding='utf-8')
+	plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".pdf",transparent=True,dpi = 600)
+	plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".png",transparent=False,dpi = 600)
