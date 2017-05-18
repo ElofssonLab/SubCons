@@ -38,7 +38,7 @@ def predictors_merged_dataframe(list_pred,a):
 		df_subcons_1 =  df_subcons_1[new_columns]
 		df_final1 = df_final1[new_columns]
 		df_all = df_final1.append(df_subcons_1,ignore_index=True)
-		list_pred.append("SubCons")
+		list_pred.append("SubCons-RF-Score")
 		se = pd.Series(list_pred)
 		df_all['Tools'] = se.values
 		cols = df_all.columns.tolist()
@@ -73,7 +73,7 @@ def predictors_merged_dataframe(list_pred,a):
 		df_subcons_1 =  df_subcons_1[new_columns]
 		df_final1 = df_final1[new_columns]
 		df_all = df_final1.append(df_subcons_1,ignore_index=True)
-		list_pred.append("SubCons")
+		list_pred.append("SubCons-RF-Score")
 		se = pd.Series(list_pred)
 		df_all['Tools'] = se.values
 		cols = df_all.columns.tolist()
@@ -163,15 +163,14 @@ for files_csv in os.listdir(sys.argv[1]+"/plot/"):
 	final_df = pd.concat(frames)
 	
 	plt.figure(1,figsize=(8,5),frameon=False)
-	gs = gridspec.GridSpec(2, 2,width_ratios=[12, 1],height_ratios=[1, 3])
+	gs = gridspec.GridSpec(2, 2,width_ratios=[12, 1],height_ratios=[1, 4])
 	ax2 = plt.subplot(gs[0])
 	ind = np.arange(len(final_df[final_df.columns[0]]))  
 	colors = {"GLG":'#1f77b4',"NUC":'#ff7f0e',"EXC":'#7f7f7f',"MIT":'#d62728',"PEX":'#9467bd',"CYT":'#bcbd22',"MEM":'#98df8a',"LYS":'#17becf',"ERE":'#393b79'}
 	localizations = final_df.columns.values[0:]
 	localizations = localizations.tolist()
-	final_df.iloc[5:6].plot(ax=plt.gca(),kind="barh", stacked=True,color=[colors[i] for i in final_df[localizations]], width=0.5,linewidth=4.0)
-	#plt.annotate(loc_def_subcons, (0.021, -0.00019),  fontsize=30)
-
+	final_df.iloc[5:6].plot(ax=plt.gca(),kind="barh", stacked=True,color=[colors[i] for i in final_df[localizations]], width=0.5,linewidth=2.0)
+	ax2.annotate(loc_def_subcons, (0.01, -0.11),  fontsize=18)
 	plt.yticks(fontsize = 13,fontweight='bold')
 	plt.tick_params(axis='x',which='both',bottom='off',top='off',labelbottom='off') 
 	plt.legend().set_visible(False)
@@ -181,9 +180,9 @@ for files_csv in os.listdir(sys.argv[1]+"/plot/"):
 	colors = {"GLG":'#1f77b4',"NUC":'#ff7f0e',"EXC":'#7f7f7f',"MIT":'#d62728',"PEX":'#9467bd',"CYT":'#bcbd22',"MEM":'#98df8a',"LYS":'#17becf',"ERE":'#393b79'}
 	localizations = final_df.columns.values[0:]
 	localizations = localizations.tolist()
-	final_df.iloc[0:5].plot(ax=plt.gca(),kind="barh", stacked=True,color=[colors[i] for i in final_df[localizations]],width=0.9,)
+	final_df.iloc[0:5].plot(ax=plt.gca(),kind="barh", stacked=True,color=[colors[i] for i in final_df[localizations]],width=0.5)
 	plt.yticks(fontsize = 13)
-	plt.legend(fontsize = 18,loc="best", ncol=1,bbox_to_anchor=(1.,1.4),handletextpad=0.2, frameon=False)
+	plt.legend(fontsize = 18,loc="best", ncol=1,bbox_to_anchor=(1.,1.14),handletextpad=0.2, frameon=False)
 	plt.gca().yaxis.grid(False)
 	plt.gca().xaxis.grid(False)
 	ax2.spines['right'].set_visible(False)
@@ -195,9 +194,10 @@ for files_csv in os.listdir(sys.argv[1]+"/plot/"):
 	ax4.spines['top'].set_visible(False)
 	ax4.xaxis.set_ticks_position('bottom')
 	ax4.yaxis.set_ticks_position('left')
-	plt.tight_layout()
-	ax2.autoscale(enable=True, axis='both', tight=None)
+	#ax2.autoscale(enable=True, axis='both', tight=None)
 	ax4.autoscale(enable=True, axis='both', tight=None)
+	plt.xlim(0,1)
+	plt.tight_layout()
 	final_df.to_csv(sys.argv[1]+'/plot/'+str(name_plot)+'_final.csv', sep='\t', encoding='utf-8')
 	plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".pdf",transparent=True,bbox_inches="tight",pad_inches=0,dpi = 600)
 	plt.savefig(sys.argv[1]+"/plot/"+str(name_plot)+".png",transparent=False,bbox_inches="tight",pad_inches=0,dpi = 600)
