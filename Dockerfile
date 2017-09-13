@@ -59,6 +59,9 @@ RUN cd /home/app &&\
 	cd PRODRES &&\
 	ln -s /data/db_prodres databases
 
+RUN cd /home/app/subcons/apps &&\
+    ln -s ../../PRODRES PRODRES
+
 #================================
 # Install loctree2  
 #===============================
