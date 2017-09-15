@@ -135,12 +135,12 @@ running SubCons locally on multiple platforms
 First install docker on your system according to the instructions
 Then your can run the following command in the terminal to get the docker image
 
-    `docker pull nanjiang/subcons`
+    docker pull nanjiang/subcons
 
 Next, you need to download the following two databases for SubCons and saved them to e.g. /data, and then extracted the zipped files there
 
-    * http://subcons.bioinfo.se/static/download/db\_subcons.zip (3.5 GB)
-    * http://subcons.bioinfo.se/static/download/db\_prodres.zip (60 GB)
+* http://subcons.bioinfo.se/static/download/db\_subcons.zip (3.5 GB)
+* http://subcons.bioinfo.se/static/download/db\_prodres.zip (60 GB)
 
 After that, you can start the docker container by the following command, suppose your working directory is /home/user/workdir
 
