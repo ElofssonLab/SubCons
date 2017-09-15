@@ -126,3 +126,30 @@ NOTE:
 
 	The final prediction(s) of SubCons can be found in '/SubCons-web-server/OUTDIR/plot'. 
 	The Latest contains both a stacked-barplot and a csv file with the score for each single predictor and SubCons.
+
+
+##Docker version
+A docker image of SubCons is also available at `nanjiang/subcons` for easier
+running SubCons locally on multiple platforms
+
+First install docker on your system according to the instructions
+Then your can run the following command in the terminal to get the docker image
+
+    `docker pull nanjiang/subcons`
+
+Next, you need to download the following two databases for SubCons and saved them to e.g. /data, and then extracted the zipped files there
+
+    * http://subcons.bioinfo.se/static/download/db\_subcons.zip (3.5 GB)
+    * http://subcons.bioinfo.se/static/download/db\_prodres.zip (60 GB)
+
+After that, you can start the docker container by the following command, suppose your working directory is /home/user/workdir
+
+    docker run -v /data:/data -v /home/user/workdir:/workdir -u $(id -u):$(id -g) -it --name subcons -restart=unless-stopped -d nanjiang/subcons
+
+
+Finally, copy your sequence file, e.g. `query.fa` to `/home/user/workdir` and you can run SubCons docker container using the following command
+
+    docker exec subcons script /dev/null -c "cd /home/user/workdir ; /home/app/subcons/master_subcons.sh /home/usr/workdir/query.fa /home/usr/workdir/out1"
+
+The result will be available at `/home/user/workdir/out1` after successful run.
+
